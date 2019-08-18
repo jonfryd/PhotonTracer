@@ -47,7 +47,8 @@ In Linux using Mono:
 
 Windows users are able to run the .exe directly, of course.
 
-Ater finishing all the number crunching, the renderer outputs a JPEG image called ```photontraced.jpg```.
+After the program finishes all its number crunching, a JPEG image called ```photontraced.jpg``` is produced.
+Cheers!
 
 # Author
 
