@@ -52,6 +52,11 @@ Windows users are able to run the .exe directly, of course.
 After the program finishes all its number crunching, a JPEG image called ```photontraced.jpg``` is produced.
 Cheers!
 
+# Warning
+
+The code is a bit of a mess and I never bothered cleaning up the ```_Renamed_Field``` suffixes that
+were added when converting the original Java code to C#. Some day...
+
 # Author
 
 This application created by Jon Frydensbjerg - email: jonf@elixlogic.com
