@@ -21,14 +21,14 @@ An example rendering of the classic Cornell box:
 
 A window shows the absorbed photon locations:
 
-<img src="photon_locations.png" alt="Rendering example" width="512" height="384"/>
+<img src="photon_locations.png" alt="Rendering example" width="1026" height="814"/>
 
 # Building
 
 Clone the repository and execute Maven from the root directory:
 
-    $ git clone https://github.com/jonfryd/ImageClustering
-    $ cd ImageClustering/
+    $ git clone https://github.com/jonfryd/PhotonTracer
+    $ cd PhotonTracer/
     $ ./build.sh
 
 This is for Linux or Mac OS X. For Windows run .bat-file:
