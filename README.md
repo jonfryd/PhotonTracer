@@ -15,7 +15,7 @@ The implementation does use multiple cores and produces nicely anti-aliased imag
 There's also a half-baked attempt to do irradiance caching which was never completely done AFAIR - debugging all
 the edge cases right turned out to be rather challenging.
 
-An example rendering of the classic Cornell box:
+A final rendering of the classic Cornell box:
 
 <img src="example.jpg" alt="Rendering example" width="512" height="384"/>
 
