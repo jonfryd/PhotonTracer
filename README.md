@@ -21,7 +21,7 @@ An example rendering of the classic Cornell box:
 
 A window shows the absorbed photon locations:
 
-<img src="photon_locations.png" alt="Rendering example" width="1026" height="814"/>
+<img src="photon_locations.png" alt="Rendering example" width="513" height="407"/>
 
 # Building
 
