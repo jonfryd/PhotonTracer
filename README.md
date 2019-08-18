@@ -37,7 +37,7 @@ This is for Linux or Mac OS X. For Windows run .bat-file:
 
 # Usage
 
-After building, run ```Photontracer.exe``` on Mac OS X using Mono (64-bit not supported it seems):
+After building, run ```Photontracer.exe``` on Mac OS X using Mono (64-bit is not yet supported):
 
     $ mono32 Photontracer.exe
 
