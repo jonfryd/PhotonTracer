@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RenderingParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <MinPhotons>10</MinPhotons>
+  <MaxPhotons>500</MaxPhotons>
+  <MaxBounces>5</MaxBounces>
+  
+  <NumberOfPrecomputeRadianceThreads>4</NumberOfPrecomputeRadianceThreads>
+  <PrecomputePhotonRadiance>false</PrecomputePhotonRadiance>
+  <MaxPhotonDistance>3</MaxPhotonDistance>
+  <MaxPhotonDistancePrecalc>1</MaxPhotonDistancePrecalc>
+  <InitialPhotonDistance>0.5</InitialPhotonDistance>
+  
+  <IrradianceCacheTolerance>0.3</IrradianceCacheTolerance>
+  <IrradianceCacheSpacing>0.1</IrradianceCacheSpacing>
+  <IrradianceSamples>750</IrradianceSamples>
+  
+  <NumberOfRenderingThreads>4</NumberOfRenderingThreads>
+  <ApproximateSolutionThreshold>10000000000</ApproximateSolutionThreshold>
+  <MaxDepth>2</MaxDepth>
+  <AntialiasSecondPass>false</AntialiasSecondPass>
+  <MaxAADepth>2</MaxAADepth>
+  <MaxColorDiff>0.02</MaxColorDiff>
+</RenderingParameters>
