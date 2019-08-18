@@ -1,17 +1,27 @@
-[![Java 5](https://img.shields.io/badge/Java-5-blue.svg)](http://www.oracle.com/technetwork/java/javase)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# ImageClustering: Content-Based Image File Renaming Tool
+# PhotonTracer: Experimental Global Illumination Renderer
 
-This is a hobby project that I did back in 2008 based on JAI (Java Advanced Imaging API).
+This is a hobby project in C# that I worked on between 2006 and 2009 derived on Java code I did back in my university days.
 
-It purpose is to take a directory of randomly named image files (e.g. JPEG or PNG) and bring order to chaos
-by using classic image feature extraction techniques along with a [self-organizing map for clustering](http://somlib.gforge.inria.fr/).
+It's basically a classic photon mapping implementation and a global illumination renderer done pretty much as
+described in Henrik Wann Jensen's book. The renderer basically runs in 3 stages:
 
-A couple of features which be useful such as multi-threaded processing and distributing work over the network
-to different nodes. It also comes with a basic Swing UI:
+1. Photon emission
+2. Rendering an approximate solution
+3. Rendering the final, accurate solution
 
-![ImageClustering Swing UI](ui.jpg?raw=true)
+The implementation does use multiple cores and produces nicely anti-aliased images. Caustics are supported, as well.
+There's also a half-baked attempt to do irradiance caching which was never completely done AFAIR - debugging all
+the edge cases right turned out to be rather challenging.
+
+An example rendering of the classic Cornell box:
+
+<img src="example.jpg" alt="Rendering example" width="512" height="384"/>
+
+A window shows the absorbed photon locations:
+
+<img src="photon_locations.png" alt="Rendering example" width="512" height="384"/>
 
 # Building
 
@@ -19,22 +29,25 @@ Clone the repository and execute Maven from the root directory:
 
     $ git clone https://github.com/jonfryd/ImageClustering
     $ cd ImageClustering/
-    $ mvn clean install
-
-# Usage
-
-After building, run e.g. the UI as:
-
-    $ ./runImageClustering.sh
+    $ ./build.sh
 
 This is for Linux or Mac OS X. For Windows run .bat-file:
 
-    $ runImageClustering.bat
+    $ build.bat
 
-When the UI is launched, select the directory, enter the expected number of clusters and press 'Process'.
-Images are then analyzed and renamed with a C###-prefix denoting the cluster each image belongs to.
+# Usage
 
-Happy renaming.
+After building, run ```Photontracer.exe``` on Mac OS X using Mono (64-bit not supported it seems):
+
+    $ mono32 Photontracer.exe
+
+In Linux using Mono:
+
+    $ mono Photontracer.exe
+
+Windows users are able to run the .exe directly, of course.
+
+Ater finishing all the number crunching, the renderer outputs a JPEG image called ```photontraced.jpg```.
 
 # Author
 
