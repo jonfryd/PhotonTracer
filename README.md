@@ -17,7 +17,7 @@ completed. Debugging all the edge cases right turned out to be really challengin
 
 There's no scene input file format or anything fancy like that. Changing the scene requires changing the code.
 
-Here's an example rendering of the classic Cornell box:
+A final rendering of the classic Cornell box:
 
 <img src="example.jpg" alt="Rendering example" width="512" height="384"/>
 
@@ -39,7 +39,7 @@ This is for Linux or Mac OS X. For Windows run .bat-file:
 
 # Usage
 
-After building, run ```Photontracer.exe``` on Mac OS X using Mono (64-bit not supported it seems):
+After building, run ```Photontracer.exe``` on Mac OS X using Mono (64-bit is not yet supported):
 
     $ mono32 Photontracer.exe
 
@@ -49,7 +49,8 @@ In Linux using Mono:
 
 Windows users are able to run the .exe directly, of course.
 
-Ater finishing all the number crunching, the renderer outputs a JPEG image called ```photontraced.jpg```.
+After the program finishes all its number crunching, a JPEG image called ```photontraced.jpg``` is produced.
+Cheers!
 
 # Author
 
