@@ -11,11 +11,13 @@ described in Henrik Wann Jensen's book. The renderer basically runs in 3 stages:
 2. Rendering an approximate solution
 3. Rendering the final, accurate solution
 
-The implementation does use multiple cores and produces nicely anti-aliased images. Caustics are supported, as well.
-There's also a half-baked attempt to do irradiance caching which was never completely done AFAIR - debugging all
-the edge cases right turned out to be rather challenging.
+The implementation does support multiple cores and produces nicely anti-aliased images like the one below. Stuff like texture mapping,
+bump mapping, and caustics rendering are supported, as well. There's also a half-baked attempt to do irradiance caching which was never
+completed. Debugging all the edge cases right turned out to be really challenging and I turned my attention to other projects.
 
-An example rendering of the classic Cornell box:
+There's no scene input file format or anything fancy like that. Changing the scene requires changing the code.
+
+Here's an example rendering of the classic Cornell box:
 
 <img src="example.jpg" alt="Rendering example" width="512" height="384"/>
 
