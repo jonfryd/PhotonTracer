@@ -4,8 +4,8 @@
 
 This is a hobby project in C# that I worked on between 2006 and 2009 derived on Java code I did back in my university days.
 
-It's basically a classic photon mapping implementation and a global illumination renderer done pretty much as
-described in Henrik Wann Jensen's book. The renderer basically runs in 3 stages:
+It's basically a classic photon mapping implementation and global illumination renderer done pretty much as
+described in [Henrik Wann Jensen's book](https://www.amazon.com/Realistic-Synthesis-Mapping-Revised-Paperback/dp/B011DC2J3O). The renderer basically runs in 3 stages:
 
 1. Photon emission
 2. Rendering an approximate solution
