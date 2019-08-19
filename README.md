@@ -55,8 +55,7 @@ Cheers!
 # Note
 
 The code is a bit of a mess and I never bothered cleaning up the ```_Renamed_Field``` suffixes that
-were added when converting the original Java code to C# using Visual Studio's migration tool. Perhaps some day
-when hell freezes over... ;-)
+were added when converting the original Java code to C# using Visual Studio's migration tool. Some day...
 
 # Author
 
