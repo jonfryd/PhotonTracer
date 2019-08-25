@@ -4,7 +4,6 @@ using Vector3D = photontracer.math.Vector3D;
 
 namespace photontracer.photonmap
 {
-	
 	public class NearestPhotons
 	{
 		public int max;

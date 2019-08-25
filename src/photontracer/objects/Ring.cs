@@ -19,13 +19,13 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.radius_Field = value;
+				this.radius_ = value;
 				getBoundingBox().getExtents ().X = value;
 				getBoundingBox().getExtents ().Z = value;
 				
 				try
 				{
-					invRadius_Field = 1.0 / value;
+					invRadius_ = 1.0 / value;
 				}
 				catch (System.ArithmeticException e)
 				{
@@ -38,12 +38,12 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.height_Field = value;
+				this.height_ = value;
 				getBoundingBox().getExtents ().Y = value;
 			}
 		}
 
-		private double radius_Field, invRadius_Field, height_Field, invPI;
+		private double radius_, invRadius_, height_, invPI;
 		
 		public Ring():base()
 		{
@@ -63,17 +63,17 @@ namespace photontracer.objects
 		
 		public virtual double invRadius()
 		{
-			return invRadius_Field;
+			return invRadius_;
 		}
 		
 		public virtual double radius()
 		{
-			return radius_Field;
+			return radius_;
 		}
 		
 		public virtual double height()
 		{
-			return height_Field;
+			return height_;
 		}
 		
 		public override bool intersect(Ray ray, Intersection intersection)
@@ -114,18 +114,18 @@ namespace photontracer.objects
 				lambda1 = -1;
 				lambda2 = -1;
 
-				if (l1 >= photontracer.SceneConstants_Fields.EPSILON && l2 >= photontracer.SceneConstants_Fields.EPSILON)
+				if (l1 >= photontracer.SceneConstants.EPSILON && l2 >= photontracer.SceneConstants.EPSILON)
 				{
 					no_lambdas = 2;
 					lambda1 = (l1 < l2)?l1:l2;
 					lambda2 = (l1 < l2)?l2:l1;
 				}
-				else if (l1 >= photontracer.SceneConstants_Fields.EPSILON)
+				else if (l1 >= photontracer.SceneConstants.EPSILON)
 				{
 					no_lambdas = 1;
 					lambda1 = l1;
 				}
-				else if (l2 >= photontracer.SceneConstants_Fields.EPSILON)
+				else if (l2 >= photontracer.SceneConstants.EPSILON)
 				{
 					no_lambdas = 1;
 					lambda1 = l2;

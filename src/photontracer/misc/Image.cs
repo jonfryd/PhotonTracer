@@ -7,7 +7,7 @@ namespace photontracer.misc
 	{
 		private const int DEFWIDTH = 320;
 		private const int DEFHEIGHT = 240;
-		private int width_Field, height_Field;
+		private int width_, height_;
 		private RGBColor[][] pixels;
 		private System.Drawing.Bitmap  offImg;
 
@@ -23,12 +23,12 @@ namespace photontracer.misc
 
 		public virtual int width()
 		{
-			return width_Field;
+			return width_;
 		}
 		
 		public virtual int height()
 		{
-			return height_Field;
+			return height_;
 		}
 		
 		protected override System.Drawing.Size DefaultSize
@@ -41,8 +41,8 @@ namespace photontracer.misc
 
 		public virtual void  setDimensions(int width, int height)
 		{
-			this.width_Field = width;
-			this.height_Field = height;
+			this.width_ = width;
+			this.height_ = height;
 			
 			Size = new System.Drawing.Size(width, height);
 			//SetClientSizeCore (width, height);
@@ -55,20 +55,20 @@ namespace photontracer.misc
 		{
 			createFramebuffer();
 			
-			pixels = new RGBColor[width_Field][];
-			for (int i = 0; i < width_Field; i++)
+			pixels = new RGBColor[width_][];
+			for (int i = 0; i < width_; i++)
 			{
-				pixels[i] = new RGBColor[height_Field];
+				pixels[i] = new RGBColor[height_];
 			}
 			
-			for (int i = 0; i < width_Field; i++)
-				for (int j = 0; j < height_Field; j++)
+			for (int i = 0; i < width_; i++)
+				for (int j = 0; j < height_; j++)
 					setPixel(i, j, new RGBColor());
 		}
 		
 		public virtual RGBColor getPixel(int x, int y)
 		{
-			if (x < 0 || x >= width_Field || y < 0 || y >= height_Field)
+			if (x < 0 || x >= width_ || y < 0 || y >= height_)
 			{
 				System.Console.Out.WriteLine("Warning! (x,y) out of bounds.");
 				
@@ -80,7 +80,7 @@ namespace photontracer.misc
 		
 		public virtual void  setPixel(int x, int y, RGBColor color)
 		{
-			if (x < 0 || x >= width_Field || y < 0 || y >= height_Field)
+			if (x < 0 || x >= width_ || y < 0 || y >= height_)
 			{
 				//System.out.println ("Warning! (x,y) out of bounds.");
 			}
@@ -104,7 +104,7 @@ namespace photontracer.misc
 		
 		public virtual void  createFramebuffer()
 		{
-			offImg = new System.Drawing.Bitmap (width_Field, height_Field);
+			offImg = new System.Drawing.Bitmap (width_, height_);
 		}
 
 		protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs e) 
@@ -161,7 +161,7 @@ namespace photontracer.misc
 	
 		public override System.String ToString()
 		{
-			return new System.Text.StringBuilder("[Image] - <" + width_Field + ", " + height_Field + ">").ToString();
+			return new System.Text.StringBuilder("[Image] - <" + width_ + ", " + height_ + ">").ToString();
 		}
 
 	}

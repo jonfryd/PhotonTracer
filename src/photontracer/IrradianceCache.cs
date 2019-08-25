@@ -198,12 +198,12 @@ namespace photontracer
 
 			internal double weight(Sample x) {
 				//return 1.0 / ((x.pi.distance(pi) * invR0) + Math.Sqrt(Math.Min(1.0, 1.0 - x.ni.dot(ni))));
-				//if (x.pi.distance(pi) < photontracer.SceneConstants_Fields.EPSILON)
+				//if (x.pi.distance(pi) < photontracer.SceneConstants.EPSILON)
 				//if (x.pi.distance(pi) < 1e-3)
 				{
 					//System.Diagnostics.Trace.WriteLine ("small!");
 					//return 1.0 / (Math.Sqrt(Math.Min(1.0, 1.0 - x.ni.dot(ni))));
-					//return photontracer.SceneConstants_Fields.HUGEVALUE;
+					//return photontracer.SceneConstants.HUGEVALUE;
 					//return 1e10;
 				}
 

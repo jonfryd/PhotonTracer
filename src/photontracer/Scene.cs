@@ -7,14 +7,13 @@ using BoundingBox = photontracer.BoundingBox;
 
 namespace photontracer
 {
-	
 	public class Scene
 	{
 		virtual public RGBColor Background
 		{
 			set
 			{
-				this.background_Field = new RGBColor(value);
+				this.background_ = new RGBColor(value);
 			}
 			
 		}
@@ -22,21 +21,21 @@ namespace photontracer
 		{
 			set
 			{
-				this.camera_Field = value;
+				this.camera_ = value;
 			}
 			
 		}
 
-		private System.Collections.ArrayList primitiveList_Field;
-		private System.Collections.ArrayList lightList_Field;
-		private RGBColor background_Field;
-		private Camera camera_Field;
+		private System.Collections.ArrayList primitiveList_;
+		private System.Collections.ArrayList lightList_;
+		private RGBColor background_;
+		private Camera camera_;
 		private BoundingBox boundingbox;
 		
 		public Scene()
 		{
-			primitiveList_Field = new System.Collections.ArrayList(10);
-			lightList_Field = new System.Collections.ArrayList(10);
+			primitiveList_ = new System.Collections.ArrayList(10);
+			lightList_ = new System.Collections.ArrayList(10);
 			
 			Background = RGBColor.RGBblue();
 			
@@ -47,34 +46,34 @@ namespace photontracer
 		
 		public virtual System.Collections.ArrayList primitiveList()
 		{
-			return primitiveList_Field;
+			return primitiveList_;
 		}
 		
 		public virtual void  addPrimitive(Primitive primitive)
 		{
-			primitiveList_Field.Add(primitive);
+			primitiveList_.Add(primitive);
 
 			boundingbox.include (primitive.getBoundingBox ());
 		}
 		
 		public virtual System.Collections.ArrayList lightList()
 		{
-			return lightList_Field;
+			return lightList_;
 		}
 		
 		public virtual void  addLight(Light light)
 		{
-			lightList_Field.Add(light);
+			lightList_.Add(light);
 		}
 		
 		public virtual RGBColor background()
 		{
-			return background_Field;
+			return background_;
 		}
 		
 		public virtual Camera camera()
 		{
-			return camera_Field;
+			return camera_;
 		}
 
 		public virtual BoundingBox getBoundingBox()

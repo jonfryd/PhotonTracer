@@ -2,16 +2,16 @@
 using System;
 using photontracer.misc;
 using photontracer.math;
+
 namespace photontracer
 {
-	
 	public class Light
 	{
 		virtual public Vector3D Position
 		{
 			set
 			{
-				this.position_Field = value;
+				this.position_ = value;
 			}
 			
 		}
@@ -19,7 +19,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.intensity_Field = value;
+				this.intensity_ = value;
 				
 				updateFinalColor();
 			}
@@ -29,7 +29,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.color_Field = value;
+				this.color_ = value;
 				
 				updateFinalColor();
 			}
@@ -39,15 +39,15 @@ namespace photontracer
 		{
 			set
 			{
-				photons_Field = value;
+				photons_ = value;
 			}
 			
 		}
-		private Vector3D position_Field;
-		private RGBColor color_Field;
+		private Vector3D position_;
+		private RGBColor color_;
 		private RGBColor finalColor;
-		private float intensity_Field;
-		private int photons_Field;
+		private float intensity_;
+		private int photons_;
 		
 		public Light()
 		{
@@ -73,22 +73,22 @@ namespace photontracer
 
 		public virtual Vector3D position(int u, int v)
 		{
-			return position_Field;
+			return position_;
 		}
 		
 		public virtual float intensity()
 		{
-			return intensity_Field;
+			return intensity_;
 		}
 		
 		public virtual RGBColor color()
 		{
-			return color_Field;
+			return color_;
 		}
 		
 		public virtual int photons()
 		{
-			return photons_Field;
+			return photons_;
 		}
 		
 		public virtual RGBColor color(Vector3D point)
@@ -103,7 +103,7 @@ namespace photontracer
 		
 		private void  updateFinalColor()
 		{
-			finalColor = color().scaleNew(intensity_Field);
+			finalColor = color().scaleNew(intensity_);
 		}
 		
 		public virtual void  sample(Vector3D pos, Vector3D ori, RGBColor power)
@@ -121,7 +121,7 @@ namespace photontracer
 			}
 			while ((x * x + y * y + z * z) > 1.0);
 			
-			pos.set(position_Field);
+			pos.set(position_);
 			ori.set(x, y, z);
 			power.set(finalColor);
 		}

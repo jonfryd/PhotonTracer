@@ -12,7 +12,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.spacing_Field = value;
+				this.spacing_ = value;
 			}
 			
 		}
@@ -20,12 +20,12 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.otherDiffuseColor_Field = value;
+				this.otherDiffuseColor_ = value;
 			}
 			
 		}
-		private RGBColor otherDiffuseColor_Field;
-		private float spacing_Field;
+		private RGBColor otherDiffuseColor_;
+		private float spacing_;
 		
 		public CheckerMaterial():base()
 		{
@@ -52,19 +52,19 @@ namespace photontracer.material
 		{
 			int value;
 			
-			value = (int) System.Math.Round(localPoint.x() / spacing_Field) + (int) System.Math.Round(localPoint.y() / spacing_Field) + (int) System.Math.Round(localPoint.z() / spacing_Field);
+			value = (int) System.Math.Round(localPoint.x() / spacing_) + (int) System.Math.Round(localPoint.y() / spacing_) + (int) System.Math.Round(localPoint.z() / spacing_);
 			
 			return ((value & 1) == 0)?diffuseColor():otherDiffuseColor();
 		}
 		
 		public virtual float spacing()
 		{
-			return spacing_Field;
+			return spacing_;
 		}
 		
 		public virtual RGBColor otherDiffuseColor()
 		{
-			return otherDiffuseColor_Field;
+			return otherDiffuseColor_;
 		}
 	}
 }

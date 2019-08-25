@@ -7,12 +7,11 @@ using RGBColor = photontracer.misc.RGBColor;
 
 namespace photontracer.photonmap
 {
-	
-	public class PhotonMap : SceneConstants
+	public class PhotonMap
 	{
 		private System.Collections.ArrayList photons;
 		
-		private int storedPhotons_Field;
+		private int storedPhotons_;
 		private int halfStoredPhotons;
 		private int prevScale;
 		
@@ -21,20 +20,20 @@ namespace photontracer.photonmap
 		
 		public PhotonMap()
 		{
-			storedPhotons_Field = 0;
+			storedPhotons_ = 0;
 			prevScale = 1;
 			
 			photons = new System.Collections.ArrayList(10);
 			
-			bboxMin = new Vector3D(photontracer.SceneConstants_Fields.HUGEVALUE);
-			bboxMax = new Vector3D(- photontracer.SceneConstants_Fields.HUGEVALUE);
+			bboxMin = new Vector3D(photontracer.SceneConstants.HUGEVALUE);
+			bboxMax = new Vector3D(- photontracer.SceneConstants.HUGEVALUE);
 			
 			photons.Add(new Photon());
 		}
 		
 		public virtual int storedPhotons()
 		{
-			return storedPhotons_Field;
+			return storedPhotons_;
 		}
 		
 		public virtual Photon getPhoton(int i)
@@ -44,7 +43,7 @@ namespace photontracer.photonmap
 		
 		public virtual Photon store(RGBColor power, Vector3D position, Vector3D direction, Vector3D surfaceNormal)
 		{
-			storedPhotons_Field++;
+			storedPhotons_++;
 			
 			Photon photon = new Photon();
 			
@@ -53,7 +52,7 @@ namespace photontracer.photonmap
 			photon.power = new RGBColor(power);
 			photon.position = new Vector3D(position);
 			
-			photon.number = storedPhotons_Field;
+			photon.number = storedPhotons_;
 			
 			photon.toSpherical(direction);
 			photon.surfaceToSpherical(surfaceNormal);
@@ -67,35 +66,35 @@ namespace photontracer.photonmap
 		
 		public virtual void  scalePhotonPower(float scale)
 		{
-			for (int i = prevScale; i <= storedPhotons_Field; i++)
+			for (int i = prevScale; i <= storedPhotons_; i++)
 			{
 				Photon p = getPhoton(i);
 				
 				p.power.scale(scale);
 			}
 			
-			if (storedPhotons_Field >= prevScale)
+			if (storedPhotons_ >= prevScale)
 			{
-				prevScale = storedPhotons_Field + 1;
+				prevScale = storedPhotons_ + 1;
 			}
 		}
 		
 		public virtual void  balance()
 		{
-			if (storedPhotons_Field > 1)
+			if (storedPhotons_ > 1)
 			{
 				Photon[] pa1;
 				Photon[] pa2;
 				
-				pa1 = new Photon[storedPhotons_Field + 1];
-				pa2 = new Photon[storedPhotons_Field + 1];
+				pa1 = new Photon[storedPhotons_ + 1];
+				pa2 = new Photon[storedPhotons_ + 1];
 				
-				for (int i = 0; i <= storedPhotons_Field; i++)
+				for (int i = 0; i <= storedPhotons_; i++)
 				{
 					pa2[i] = getPhoton(i);
 				}
 				
-				balanceSegment(pa1, pa2, 1, 1, storedPhotons_Field);
+				balanceSegment(pa1, pa2, 1, 1, storedPhotons_);
 				
 				// reorganise balance kd-tree (make a heap)
 				int foo = 1;
@@ -104,7 +103,7 @@ namespace photontracer.photonmap
 				
 				Photon fooPhoton = getPhoton(j);
 				
-				for (int i = 1; i <= storedPhotons_Field; i++)
+				for (int i = 1; i <= storedPhotons_; i++)
 				{
 					d = pa1[j].number;
 					pa1[j] = null;
@@ -119,9 +118,9 @@ namespace photontracer.photonmap
 						photons[j] = fooPhoton;
 						System.Object generatedAux = fooPhoton;
 						
-						if (i < storedPhotons_Field)
+						if (i < storedPhotons_)
 						{
-							for (; foo <= storedPhotons_Field; foo++)
+							for (; foo <= storedPhotons_; foo++)
 							{
 								if (pa1[foo] != null)
 								{
@@ -141,7 +140,7 @@ namespace photontracer.photonmap
 				}
 			}
 			
-			halfStoredPhotons = (storedPhotons_Field / 2) - 1;
+			halfStoredPhotons = (storedPhotons_ / 2) - 1;
 		}
 		
 		private void  medianSplit(Photon[] p, int left, int right, int median, int axis)
@@ -421,7 +420,7 @@ namespace photontracer.photonmap
 			locatePhotons(np, 1);
 			
 			// if less than MINPHOTONS return
-			if (np.found < photontracer.SceneConstants_Fields.MINPHOTONS)
+			if (np.found < photontracer.SceneConstants.MINPHOTONS)
 			{
 				return ;
 			}
@@ -466,7 +465,7 @@ namespace photontracer.photonmap
 			locatePhotons(np, 1);
 			
 			// if less than MINPHOTONS return
-			if (np.found < photontracer.SceneConstants_Fields.MINPHOTONS)
+			if (np.found < photontracer.SceneConstants.MINPHOTONS)
 			{
 				return ;
 			}

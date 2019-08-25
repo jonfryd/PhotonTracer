@@ -89,11 +89,11 @@ namespace photontracer.objects
 
 			/* Check if the ray lies parallel to the plane */
 			vd = ng.dot (dir);
-			if ((vd > -photontracer.SceneConstants_Fields.EPSILON) && (vd < photontracer.SceneConstants_Fields.EPSILON))
+			if ((vd > -photontracer.SceneConstants.EPSILON) && (vd < photontracer.SceneConstants.EPSILON))
 				return false;
 			/* Check if ray intersects plane */
 			double t = -((ng.x() * orig.x()) + (ng.y() * orig.y()) + (ng.z() * orig.z()) + d) / vd;
-			if (t < photontracer.SceneConstants_Fields.EPSILON)
+			if (t < photontracer.SceneConstants.EPSILON)
 				return false;
 			/* Check if intersection is inside the triangle */
 			switch (dropAxis) 

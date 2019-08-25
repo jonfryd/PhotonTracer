@@ -22,7 +22,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.direction_Field = value;
+				this.direction_ = value;
 			}
 			
 		}
@@ -34,7 +34,7 @@ namespace photontracer.misc
 			}
 			
 		}
-		private Vector3D location, direction_Field;
+		private Vector3D location, direction_;
 		
 		public Ray()
 		{
@@ -56,22 +56,22 @@ namespace photontracer.misc
 		
 		//public virtual Vector3D location()
 		//{
-		//	return location_Field;
+		//	return location_;
 		//}
 		
 		public virtual Vector3D direction()
 		{
-			return direction_Field;
+			return direction_;
 		}
 		
 		public virtual Vector3D destination()
 		{
-			return location.addNew(direction_Field);
+			return location.addNew(direction_);
 		}
 		
 		public virtual void  normalize()
 		{
-			direction_Field.normalize();
+			direction_.normalize();
 		}
 		
 		public override System.String ToString()

@@ -11,7 +11,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.intersectionPoint_Field = value;
+				this.intersectionPoint_ = value;
 			}
 			
 		}
@@ -19,7 +19,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.intersectedObject_Field = value;
+				this.intersectedObject_ = value;
 			}
 			
 		}
@@ -27,13 +27,13 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.lambda_Field = value;
+				this.lambda_ = value;
 			}
 			
 		}
-		private Vector3D intersectionPoint_Field;
-		private Primitive intersectedObject_Field;
-		private double lambda_Field;
+		private Vector3D intersectionPoint_;
+		private Primitive intersectedObject_;
+		private double lambda_;
 		
 		public Intersection()
 		{
@@ -52,17 +52,17 @@ namespace photontracer.misc
 		
 		public virtual Vector3D intersectionPoint()
 		{
-			return intersectionPoint_Field;
+			return intersectionPoint_;
 		}
 		
 		public virtual Primitive intersectedObject()
 		{
-			return intersectedObject_Field;
+			return intersectedObject_;
 		}
 		
 		public virtual double lambda()
 		{
-			return lambda_Field;
+			return lambda_;
 		}
 		
 		public virtual void  set(Vector3D intersectionPoint, Primitive intersectedObject, double lambda)

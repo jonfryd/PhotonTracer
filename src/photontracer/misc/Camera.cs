@@ -1,20 +1,20 @@
 // Basic camera class
 using System;
 using Vector3D = photontracer.math.Vector3D;
+
 namespace photontracer.misc
-{
-	
+{	
 	public class Camera
 	{
 		virtual public double FocalLength
 		{
 			set
 			{
-				this.focalLength_Field = value;
+				this.focalLength_ = value;
 			}
 			
 		}
-		private double focalLength_Field;
+		private double focalLength_;
 		
 		public Camera()
 		{
@@ -28,12 +28,12 @@ namespace photontracer.misc
 		
 		public virtual double focalLength()
 		{
-			return focalLength_Field;
+			return focalLength_;
 		}
 		
 		public virtual Ray getRay(double u, double v)
 		{
-			Vector3D direction = new Vector3D(u, v, focalLength_Field);
+			Vector3D direction = new Vector3D(u, v, focalLength_);
 			direction.normalize();
 			
 			return new Ray(new Vector3D(u, v, 0), direction);
@@ -41,7 +41,7 @@ namespace photontracer.misc
 		
 		public override System.String ToString()
 		{
-			return new System.Text.StringBuilder("[Camera] -\n  Focal length: " + focalLength_Field).ToString();
+			return new System.Text.StringBuilder("[Camera] -\n  Focal length: " + focalLength_).ToString();
 		}
 	}
 }

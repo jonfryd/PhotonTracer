@@ -7,14 +7,13 @@ using Primitive = photontracer.objects.Primitive;
 
 namespace photontracer.material
 {
-	
-	public class Bump : SceneConstants
+	public class Bump
 	{
 		virtual public Material Source
 		{
 			set
 			{
-				this.source_Field = value;
+				this.source_ = value;
 			}
 			
 		}
@@ -22,7 +21,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.gradDisp_Field = value;
+				this.gradDisp_ = value;
 			}
 			
 		}
@@ -30,7 +29,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.bumpFactor_Field = value;
+				this.bumpFactor_ = value;
 			}
 			
 		}
@@ -38,14 +37,14 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.samples_Field = value;
+				this.samples_ = value;
 			}
 			
 		}
-		private Material source_Field;
-		private Vector3D gradDisp_Field;
-		private float bumpFactor_Field;
-		private Vector3D samples_Field;
+		private Material source_;
+		private Vector3D gradDisp_;
+		private float bumpFactor_;
+		private Vector3D samples_;
 		
 		public Bump()
 		{
@@ -91,11 +90,11 @@ namespace photontracer.material
 			
 			r = s.cross(new Vector3D(0, 1, 0));
 			
-			if (r.norm() < photontracer.SceneConstants_Fields.EPSILON)
+			if (r.norm() < photontracer.SceneConstants.EPSILON)
 			{
 				r = new Vector3D(0, 1, 0);
 				
-				if (System.Math.Abs(s.y() - 1) < photontracer.SceneConstants_Fields.EPSILON)
+				if (System.Math.Abs(s.y() - 1) < photontracer.SceneConstants.EPSILON)
 				{
 					s = new Vector3D(0, 1, 0);
 				}
@@ -130,7 +129,7 @@ namespace photontracer.material
 			{
 				tDampingAbs = (1.0 - (y * y) * 0.8);
 				
-				if (tDampingAbs > (1.0 - photontracer.SceneConstants_Fields.EPSILON))
+				if (tDampingAbs > (1.0 - photontracer.SceneConstants.EPSILON))
 				{
 					tDampingAbs = 0;
 				}
@@ -151,7 +150,7 @@ namespace photontracer.material
 					
 					rDampingAbs = (1.0 - (x * x) * 0.8);
 					
-					if (rDampingAbs > (1.0 - photontracer.SceneConstants_Fields.EPSILON))
+					if (rDampingAbs > (1.0 - photontracer.SceneConstants.EPSILON))
 					{
 						rDampingAbs = 0;
 					}
@@ -183,22 +182,22 @@ namespace photontracer.material
 		
 		public virtual Material source()
 		{
-			return source_Field;
+			return source_;
 		}
 		
 		public virtual Vector3D gradDisp()
 		{
-			return gradDisp_Field;
+			return gradDisp_;
 		}
 		
 		public virtual float bumpFactor()
 		{
-			return bumpFactor_Field;
+			return bumpFactor_;
 		}
 		
 		public virtual Vector3D samples()
 		{
-			return samples_Field;
+			return samples_;
 		}
 	}
 }

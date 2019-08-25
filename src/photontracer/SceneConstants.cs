@@ -1,9 +1,9 @@
 // Various global constants
 using System;
+
 namespace photontracer
 {
-	
-	public struct SceneConstants_Fields 
+	public struct SceneConstants 
 	{
 		public readonly static double EPSILON = 1e-6;
 		public readonly static double HUGEVALUE = 1e10;
@@ -28,8 +28,5 @@ namespace photontracer
 		public readonly static int MAXDEPTH = 5;
 		public readonly static int MAXAADEPTH = 2;
 		public readonly static float MAXCOLORDIFF = 0.02f;
-	}
-
-	public interface SceneConstants {
 	}
 }

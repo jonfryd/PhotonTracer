@@ -13,7 +13,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.otherDiffuseColor_Field = value;
+				this.otherDiffuseColor_ = value;
 			}
 			
 		}
@@ -21,7 +21,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.tiling_Field = value;
+				this.tiling_ = value;
 			}
 			
 		}
@@ -29,8 +29,8 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.offset_Field = new Vector3D(value);
-				this.offset_Field.add(0.5);
+				this.offset_ = new Vector3D(value);
+				this.offset_.add(0.5);
 			}
 			
 		}
@@ -38,7 +38,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.mirror_Field = value;
+				this.mirror_ = value;
 			}
 			
 		}
@@ -46,23 +46,22 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.tile_Field = value;
+				this.tile_ = value;
 			}
 			
 		}
-		private RGBColor otherDiffuseColor_Field;
+		private RGBColor otherDiffuseColor_;
 //		private BufferedImage texture;
 		private System.Drawing.Bitmap texture;
 		private int textureWidth, textureHeight;
 		private float fTextureWidth, fTextureHeight;
-		private Vector3D tiling_Field;
-		private Vector3D offset_Field;
-		private bool mirror_Field;
-		private bool tile_Field;
+		private Vector3D tiling_;
+		private Vector3D offset_;
+		private bool mirror_;
+		private bool tile_;
 		
 		public TextureMaterial():base()
-		{
-			
+		{	
 			OtherDiffuseColor = new RGBColor();
 			Tiling = new Vector3D(1, 1, 0);
 			Offset = new Vector3D();
@@ -72,18 +71,17 @@ namespace photontracer.material
 		
 		public TextureMaterial(RGBColor ambientColor, RGBColor diffuseColor, RGBColor specularColor, RGBColor transmissionColor, float phongExponent, float IOR, RGBColor otherDiffuseColor, Vector3D tiling, Vector3D offset, bool mirror, bool tile, System.String filename):base(ambientColor, diffuseColor, specularColor, transmissionColor, phongExponent, IOR)
 		{
-			
 			OtherDiffuseColor = otherDiffuseColor;
 			Tiling = tiling;
 			Offset = offset;
 			Mirror = mirror;
 			Tile = tile;
+
 			loadJPEG(filename);
 		}
 		
 		public TextureMaterial(Material material, RGBColor otherDiffuseColor, Vector3D tiling, Vector3D offset, bool mirror, bool tile, System.String filename):base(material)
-		{
-			
+		{	
 			OtherDiffuseColor = new RGBColor(otherDiffuseColor);
 			Tiling = tiling;
 			Offset = offset;
@@ -133,7 +131,7 @@ namespace photontracer.material
 		
 		private int ifloor(int a, int b)
 		{
-			return (a < 0)?((a / b) - 1):(a / b);
+			return (a < 0) ? ((a / b) - 1) : (a / b);
 		}
 		
 		private int correctTexel(int value, ref bool wrapped, int max)
@@ -217,35 +215,35 @@ namespace photontracer.material
 		{
 			Vector3D finalLocalPoint;
 			
-			finalLocalPoint = localPoint.scaleNew(tiling_Field);
-			finalLocalPoint.add(offset_Field);
+			finalLocalPoint = localPoint.scaleNew(tiling_);
+			finalLocalPoint.add(offset_);
 			
 			return lerpTexel(finalLocalPoint);
 		}
 		
 		public virtual RGBColor otherDiffuseColor()
 		{
-			return otherDiffuseColor_Field;
+			return otherDiffuseColor_;
 		}
 		
 		public virtual Vector3D tiling()
 		{
-			return tiling_Field;
+			return tiling_;
 		}
 		
 		public virtual Vector3D offset()
 		{
-			return offset_Field;
+			return offset_;
 		}
 		
 		public virtual bool mirror()
 		{
-			return mirror_Field;
+			return mirror_;
 		}
 		
 		public virtual bool tile()
 		{
-			return tile_Field;
+			return tile_;
 		}
 	}
 }

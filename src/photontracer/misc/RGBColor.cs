@@ -10,7 +10,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.red_Field = value;
+				this.red_ = value;
 			}
 			
 		}
@@ -18,7 +18,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.green_Field = value;
+				this.green_ = value;
 			}
 			
 		}
@@ -26,20 +26,20 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.blue_Field = value;
+				this.blue_ = value;
 			}
 			
 		}
-		private static RGBColor RGBblack_Field;
-		private static RGBColor RGBwhite_Field;
-		private static RGBColor RGBred_Field;
-		private static RGBColor RGBgreen_Field;
-		private static RGBColor RGBblue_Field;
-		private static RGBColor RGByellow_Field;
-		private static RGBColor RGBpurple_Field;
-		private static RGBColor RGBcyan_Field;
+		private static RGBColor RGBblack_;
+		private static RGBColor RGBwhite_;
+		private static RGBColor RGBred_;
+		private static RGBColor RGBgreen_;
+		private static RGBColor RGBblue_;
+		private static RGBColor RGByellow_;
+		private static RGBColor RGBpurple_;
+		private static RGBColor RGBcyan_;
 		
-		private float red_Field, green_Field, blue_Field;
+		private float red_, green_, blue_;
 		
 		public RGBColor()
 		{
@@ -68,17 +68,17 @@ namespace photontracer.misc
 		
 		public virtual float red()
 		{
-			return red_Field;
+			return red_;
 		}
 		
 		public virtual float green()
 		{
-			return green_Field;
+			return green_;
 		}
 		
 		public virtual float blue()
 		{
-			return blue_Field;
+			return blue_;
 		}
 		
 		public virtual void  set(float value)
@@ -113,20 +113,20 @@ namespace photontracer.misc
 		
 		public virtual void  clamp()
 		{
-			if (red_Field > 1)
-				red_Field = 1;
-			if (red_Field < 0)
-				red_Field = 0;
+			if (red_ > 1)
+				red_ = 1;
+			if (red_ < 0)
+				red_ = 0;
 
-			if (green_Field > 1)
-				green_Field = 1;
-			if (green_Field < 0)
-				green_Field = 0;
+			if (green_ > 1)
+				green_ = 1;
+			if (green_ < 0)
+				green_ = 0;
 			
-			if (blue_Field > 1)
-				blue_Field = 1;
-			if (blue_Field < 0)
-				blue_Field = 0;
+			if (blue_ > 1)
+				blue_ = 1;
+			if (blue_ < 0)
+				blue_ = 0;
 		}
 		
 		public virtual void  set(float red, float green, float blue)
@@ -217,35 +217,35 @@ namespace photontracer.misc
 
 		public static RGBColor RGBblack()
 		{
-			return RGBblack_Field;
+			return RGBblack_;
 		}
 		public static RGBColor RGBwhite()
 		{
-			return RGBwhite_Field;
+			return RGBwhite_;
 		}
 		public static RGBColor RGBred()
 		{
-			return RGBred_Field;
+			return RGBred_;
 		}
 		public static RGBColor RGBgreen()
 		{
-			return RGBgreen_Field;
+			return RGBgreen_;
 		}
 		public static RGBColor RGBblue()
 		{
-			return RGBblue_Field;
+			return RGBblue_;
 		}
 		public static RGBColor RGByellow()
 		{
-			return RGByellow_Field;
+			return RGByellow_;
 		}
 		public static RGBColor RGBpurple()
 		{
-			return RGBpurple_Field;
+			return RGBpurple_;
 		}
 		public static RGBColor RGBcyan()
 		{
-			return RGBcyan_Field;
+			return RGBcyan_;
 		}
 		
 		public override System.String ToString()
@@ -254,14 +254,14 @@ namespace photontracer.misc
 		}
 		static RGBColor()
 		{
-			RGBblack_Field = new RGBColor(0, 0, 0);
-			RGBwhite_Field = new RGBColor(1, 1, 1);
-			RGBred_Field = new RGBColor(1, 0, 0);
-			RGBgreen_Field = new RGBColor(0, 1, 0);
-			RGBblue_Field = new RGBColor(0, 0, 1);
-			RGByellow_Field = new RGBColor(1, 1, 0);
-			RGBpurple_Field = new RGBColor(1, 0, 1);
-			RGBcyan_Field = new RGBColor(0, 1, 1);
+			RGBblack_ = new RGBColor(0, 0, 0);
+			RGBwhite_ = new RGBColor(1, 1, 1);
+			RGBred_ = new RGBColor(1, 0, 0);
+			RGBgreen_ = new RGBColor(0, 1, 0);
+			RGBblue_ = new RGBColor(0, 0, 1);
+			RGByellow_ = new RGBColor(1, 1, 0);
+			RGBpurple_ = new RGBColor(1, 0, 1);
+			RGBcyan_ = new RGBColor(0, 1, 1);
 		}
 	}
 }

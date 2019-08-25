@@ -9,13 +9,13 @@ using SceneConstants = photontracer.SceneConstants;
 namespace photontracer.objects
 {
 	
-	public class Primitive : PrimitiveInterface, SceneConstants
+	public class Primitive : PrimitiveInterface
 	{
 		virtual public Material Material
 		{
 			set
 			{
-				this.material_Field = value;
+				this.material_ = value;
 			}
 			
 		}
@@ -23,14 +23,14 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.position_Field = value;
+				this.position_ = value;
 
 				boundingbox.getCenter().set (value);
 			}
 			
 		}
-		private Material material_Field;
-		private Vector3D position_Field;
+		private Material material_;
+		private Vector3D position_;
 		private BoundingBox boundingbox;
 		
 		public Primitive()
@@ -39,7 +39,7 @@ namespace photontracer.objects
 
 			Position = new Vector3D();
 			
-			material_Field = new Material();
+			material_ = new Material();
 		}
 		
 		public Primitive(Vector3D position)
@@ -48,17 +48,17 @@ namespace photontracer.objects
 
 			Position = position;
 			
-			material_Field = new Material();
+			material_ = new Material();
 		}
 		
 		public virtual Material material()
 		{
-			return material_Field;
+			return material_;
 		}
 		
 		public virtual Vector3D position()
 		{
-			return position_Field;
+			return position_;
 		}
 		
 		public virtual bool intersect(Ray ray, Intersection intersection)

@@ -1,16 +1,16 @@
 // 3D vector class
 using System;
 using RGBColor = photontracer.misc.RGBColor;
+
 namespace photontracer.math
-{
-	
+{	
 	public class Vector3D
 	{
 		virtual public double X
 		{
 			set
 			{
-				this.x_Field = value;
+				this.x_ = value;
 			}
 			
 		}
@@ -18,7 +18,7 @@ namespace photontracer.math
 		{
 			set
 			{
-				this.y_Field = value;
+				this.y_ = value;
 			}
 			
 		}
@@ -26,15 +26,15 @@ namespace photontracer.math
 		{
 			set
 			{
-				this.z_Field = value;
+				this.z_ = value;
 			}
 			
 		}
-		private double x_Field, y_Field, z_Field;
+		private double x_, y_, z_;
 		
 		public Vector3D()
 		{
-			x_Field = y_Field = z_Field = 0;
+			x_ = y_ = z_ = 0;
 		}
 		
 		public Vector3D(double a)
@@ -65,17 +65,17 @@ namespace photontracer.math
 		
 		public virtual double x()
 		{
-			return x_Field;
+			return x_;
 		}
 		
 		public virtual double y()
 		{
-			return y_Field;
+			return y_;
 		}
 		
 		public virtual double z()
 		{
-			return z_Field;
+			return z_;
 		}
 		
 		public virtual double get(int i)
@@ -276,31 +276,31 @@ namespace photontracer.math
 		
 		public virtual void  updateMinMax(Vector3D min, Vector3D max)
 		{
-			if (x_Field < min.x())
+			if (x_ < min.x())
 			{
-				min.X = x_Field;
+				min.X = x_;
 			}
-			if (x_Field > max.x())
+			if (x_ > max.x())
 			{
-				max.X = x_Field;
-			}
-			
-			if (y_Field < min.y())
-			{
-				min.Y = y_Field;
-			}
-			if (y_Field > max.y())
-			{
-				max.Y = y_Field;
+				max.X = x_;
 			}
 			
-			if (z_Field < min.z())
+			if (y_ < min.y())
 			{
-				min.Z = z_Field;
+				min.Y = y_;
 			}
-			if (z_Field > max.z())
+			if (y_ > max.y())
 			{
-				max.Z = z_Field;
+				max.Y = y_;
+			}
+			
+			if (z_ < min.z())
+			{
+				min.Z = z_;
+			}
+			if (z_ > max.z())
+			{
+				max.Z = z_;
 			}
 		}
 		

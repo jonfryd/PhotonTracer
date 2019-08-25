@@ -2,9 +2,9 @@
 using System;
 using Vector3D = photontracer.math.Vector3D;
 using RGBColor = photontracer.misc.RGBColor;
+
 namespace photontracer.photonmap
 {
-	
 	public class Photon
 	{
 		public Vector3D position;

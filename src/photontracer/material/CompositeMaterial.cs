@@ -12,7 +12,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				amount1_Field = value;
+				amount1_ = value;
 			}
 			
 		}
@@ -20,7 +20,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				amount2_Field = value;
+				amount2_ = value;
 			}
 			
 		}
@@ -28,7 +28,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				material1_Field = value;
+				material1_ = value;
 			}
 			
 		}
@@ -36,12 +36,12 @@ namespace photontracer.material
 		{
 			set
 			{
-				material2_Field = value;
+				material2_ = value;
 			}
 			
 		}
-		private Material material1_Field, material2_Field;
-		private float amount1_Field, amount2_Field;
+		private Material material1_, material2_;
+		private float amount1_, amount2_;
 		
 		public CompositeMaterial():base()
 		{
@@ -72,30 +72,30 @@ namespace photontracer.material
 		
 		public override RGBColor diffuseColor(Vector3D localPoint)
 		{
-			RGBColor color = material1_Field.diffuseColor(localPoint).scaleNew(amount1_Field);
-			color.add(material2_Field.diffuseColor(localPoint).scaleNew(amount2_Field));
+			RGBColor color = material1_.diffuseColor(localPoint).scaleNew(amount1_);
+			color.add(material2_.diffuseColor(localPoint).scaleNew(amount2_));
 			
 			return color;
 		}
 		
 		public virtual float amount1()
 		{
-			return amount1_Field;
+			return amount1_;
 		}
 		
 		public virtual float amount2()
 		{
-			return amount2_Field;
+			return amount2_;
 		}
 		
 		public virtual Material material1()
 		{
-			return material1_Field;
+			return material1_;
 		}
 		
 		public virtual Material material2()
 		{
-			return material2_Field;
+			return material2_;
 		}
 	}
 }
