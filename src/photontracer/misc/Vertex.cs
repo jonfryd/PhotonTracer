@@ -41,8 +41,8 @@ namespace photontracer.misc
 		 */
 		public void set(Vertex v) 
 		{
-			p.set_Renamed(v.p);
-			n.set_Renamed(v.n);
+			p.set(v.p);
+			n.set(v.n);
 			tex.X = v.tex.X;
 			tex.Y = v.tex.Y;
 		}

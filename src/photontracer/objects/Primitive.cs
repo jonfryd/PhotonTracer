@@ -15,7 +15,7 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.material_Renamed_Field = value;
+				this.material_Field = value;
 			}
 			
 		}
@@ -23,14 +23,14 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.position_Renamed_Field = value;
+				this.position_Field = value;
 
-				boundingbox.getCenter().set_Renamed (value);
+				boundingbox.getCenter().set (value);
 			}
 			
 		}
-		private Material material_Renamed_Field;
-		private Vector3D position_Renamed_Field;
+		private Material material_Field;
+		private Vector3D position_Field;
 		private BoundingBox boundingbox;
 		
 		public Primitive()
@@ -39,7 +39,7 @@ namespace photontracer.objects
 
 			Position = new Vector3D();
 			
-			material_Renamed_Field = new Material();
+			material_Field = new Material();
 		}
 		
 		public Primitive(Vector3D position)
@@ -48,17 +48,17 @@ namespace photontracer.objects
 
 			Position = position;
 			
-			material_Renamed_Field = new Material();
+			material_Field = new Material();
 		}
 		
 		public virtual Material material()
 		{
-			return material_Renamed_Field;
+			return material_Field;
 		}
 		
 		public virtual Vector3D position()
 		{
-			return position_Renamed_Field;
+			return position_Field;
 		}
 		
 		public virtual bool intersect(Ray ray, Intersection intersection)
@@ -83,9 +83,8 @@ namespace photontracer.objects
 			return new Vector3D();
 		}
 		
-		public virtual System.String ToString()
+		public override System.String ToString()
 		{
-			//UPGRADE_TODO: The equivalent in .NET for method 'java.lang.Object.toString' may return a different value. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1043"'
 			return new System.Text.StringBuilder("[Primitive] -\n  Position: " + position()).ToString();
 		}
 	}

@@ -137,7 +137,7 @@ namespace photontracer
 							//}
 
 							x.irr = s.getIrradiance(x).scaleNew ((float) wi);
-							//x.irr.set_Renamed (s.getIrradiance(x).scaleNew ((float) wi));
+							//x.irr.set (s.getIrradiance(x).scaleNew ((float) wi));
 						}
 						weight += wi;
 					}

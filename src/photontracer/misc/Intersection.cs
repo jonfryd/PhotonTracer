@@ -11,7 +11,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.intersectionPoint_Renamed_Field = value;
+				this.intersectionPoint_Field = value;
 			}
 			
 		}
@@ -19,7 +19,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.intersectedObject_Renamed_Field = value;
+				this.intersectedObject_Field = value;
 			}
 			
 		}
@@ -27,54 +27,54 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.lambda_Renamed_Field = value;
+				this.lambda_Field = value;
 			}
 			
 		}
-		private Vector3D intersectionPoint_Renamed_Field;
-		private Primitive intersectedObject_Renamed_Field;
-		private double lambda_Renamed_Field;
+		private Vector3D intersectionPoint_Field;
+		private Primitive intersectedObject_Field;
+		private double lambda_Field;
 		
 		public Intersection()
 		{
-			set_Renamed(null, null, 0);
+			set(null, null, 0);
 		}
 		
 		public Intersection(Vector3D intersectionPoint, Primitive intersectedObject, double lambda)
 		{
-			set_Renamed(intersectionPoint, intersectedObject, lambda);
+			set(intersectionPoint, intersectedObject, lambda);
 		}
 		
 		public Intersection(Intersection other)
 		{
-			set_Renamed(other);
+			set(other);
 		}
 		
 		public virtual Vector3D intersectionPoint()
 		{
-			return intersectionPoint_Renamed_Field;
+			return intersectionPoint_Field;
 		}
 		
 		public virtual Primitive intersectedObject()
 		{
-			return intersectedObject_Renamed_Field;
+			return intersectedObject_Field;
 		}
 		
 		public virtual double lambda()
 		{
-			return lambda_Renamed_Field;
+			return lambda_Field;
 		}
 		
-		public virtual void  set_Renamed(Vector3D intersectionPoint, Primitive intersectedObject, double lambda)
+		public virtual void  set(Vector3D intersectionPoint, Primitive intersectedObject, double lambda)
 		{
 			IntersectionPoint = intersectionPoint;
 			IntersectedObject = intersectedObject;
 			Lambda = lambda;
 		}
 		
-		public virtual void  set_Renamed(Intersection other)
+		public virtual void  set(Intersection other)
 		{
-			set_Renamed(other.intersectionPoint(), other.intersectedObject(), other.lambda());
+			set(other.intersectionPoint(), other.intersectedObject(), other.lambda());
 		}
 	}
 }

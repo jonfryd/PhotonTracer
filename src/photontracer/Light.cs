@@ -11,7 +11,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.position_Renamed_Field = value;
+				this.position_Field = value;
 			}
 			
 		}
@@ -19,7 +19,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.intensity_Renamed_Field = value;
+				this.intensity_Field = value;
 				
 				updateFinalColor();
 			}
@@ -29,7 +29,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.color_Renamed_Field = value;
+				this.color_Field = value;
 				
 				updateFinalColor();
 			}
@@ -39,15 +39,15 @@ namespace photontracer
 		{
 			set
 			{
-				photons_Renamed_Field = value;
+				photons_Field = value;
 			}
 			
 		}
-		private Vector3D position_Renamed_Field;
-		private RGBColor color_Renamed_Field;
+		private Vector3D position_Field;
+		private RGBColor color_Field;
 		private RGBColor finalColor;
-		private float intensity_Renamed_Field;
-		private int photons_Renamed_Field;
+		private float intensity_Field;
+		private int photons_Field;
 		
 		public Light()
 		{
@@ -73,22 +73,22 @@ namespace photontracer
 
 		public virtual Vector3D position(int u, int v)
 		{
-			return position_Renamed_Field;
+			return position_Field;
 		}
 		
 		public virtual float intensity()
 		{
-			return intensity_Renamed_Field;
+			return intensity_Field;
 		}
 		
 		public virtual RGBColor color()
 		{
-			return color_Renamed_Field;
+			return color_Field;
 		}
 		
 		public virtual int photons()
 		{
-			return photons_Renamed_Field;
+			return photons_Field;
 		}
 		
 		public virtual RGBColor color(Vector3D point)
@@ -103,7 +103,7 @@ namespace photontracer
 		
 		private void  updateFinalColor()
 		{
-			finalColor = color().scaleNew(intensity_Renamed_Field);
+			finalColor = color().scaleNew(intensity_Field);
 		}
 		
 		public virtual void  sample(Vector3D pos, Vector3D ori, RGBColor power)
@@ -121,9 +121,9 @@ namespace photontracer
 			}
 			while ((x * x + y * y + z * z) > 1.0);
 			
-			pos.set_Renamed(position_Renamed_Field);
-			ori.set_Renamed(x, y, z);
-			power.set_Renamed(finalColor);
+			pos.set(position_Field);
+			ori.set(x, y, z);
+			power.set(finalColor);
 		}
 	}
 }

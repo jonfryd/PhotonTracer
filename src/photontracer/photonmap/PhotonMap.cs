@@ -12,7 +12,7 @@ namespace photontracer.photonmap
 	{
 		private System.Collections.ArrayList photons;
 		
-		private int storedPhotons_Renamed_Field;
+		private int storedPhotons_Field;
 		private int halfStoredPhotons;
 		private int prevScale;
 		
@@ -21,7 +21,7 @@ namespace photontracer.photonmap
 		
 		public PhotonMap()
 		{
-			storedPhotons_Renamed_Field = 0;
+			storedPhotons_Field = 0;
 			prevScale = 1;
 			
 			photons = new System.Collections.ArrayList(10);
@@ -34,7 +34,7 @@ namespace photontracer.photonmap
 		
 		public virtual int storedPhotons()
 		{
-			return storedPhotons_Renamed_Field;
+			return storedPhotons_Field;
 		}
 		
 		public virtual Photon getPhoton(int i)
@@ -44,7 +44,7 @@ namespace photontracer.photonmap
 		
 		public virtual Photon store(RGBColor power, Vector3D position, Vector3D direction, Vector3D surfaceNormal)
 		{
-			storedPhotons_Renamed_Field++;
+			storedPhotons_Field++;
 			
 			Photon photon = new Photon();
 			
@@ -53,7 +53,7 @@ namespace photontracer.photonmap
 			photon.power = new RGBColor(power);
 			photon.position = new Vector3D(position);
 			
-			photon.number = storedPhotons_Renamed_Field;
+			photon.number = storedPhotons_Field;
 			
 			photon.toSpherical(direction);
 			photon.surfaceToSpherical(surfaceNormal);
@@ -67,35 +67,35 @@ namespace photontracer.photonmap
 		
 		public virtual void  scalePhotonPower(float scale)
 		{
-			for (int i = prevScale; i <= storedPhotons_Renamed_Field; i++)
+			for (int i = prevScale; i <= storedPhotons_Field; i++)
 			{
 				Photon p = getPhoton(i);
 				
 				p.power.scale(scale);
 			}
 			
-			if (storedPhotons_Renamed_Field >= prevScale)
+			if (storedPhotons_Field >= prevScale)
 			{
-				prevScale = storedPhotons_Renamed_Field + 1;
+				prevScale = storedPhotons_Field + 1;
 			}
 		}
 		
 		public virtual void  balance()
 		{
-			if (storedPhotons_Renamed_Field > 1)
+			if (storedPhotons_Field > 1)
 			{
 				Photon[] pa1;
 				Photon[] pa2;
 				
-				pa1 = new Photon[storedPhotons_Renamed_Field + 1];
-				pa2 = new Photon[storedPhotons_Renamed_Field + 1];
+				pa1 = new Photon[storedPhotons_Field + 1];
+				pa2 = new Photon[storedPhotons_Field + 1];
 				
-				for (int i = 0; i <= storedPhotons_Renamed_Field; i++)
+				for (int i = 0; i <= storedPhotons_Field; i++)
 				{
 					pa2[i] = getPhoton(i);
 				}
 				
-				balanceSegment(pa1, pa2, 1, 1, storedPhotons_Renamed_Field);
+				balanceSegment(pa1, pa2, 1, 1, storedPhotons_Field);
 				
 				// reorganise balance kd-tree (make a heap)
 				int foo = 1;
@@ -104,7 +104,7 @@ namespace photontracer.photonmap
 				
 				Photon fooPhoton = getPhoton(j);
 				
-				for (int i = 1; i <= storedPhotons_Renamed_Field; i++)
+				for (int i = 1; i <= storedPhotons_Field; i++)
 				{
 					d = pa1[j].number;
 					pa1[j] = null;
@@ -119,9 +119,9 @@ namespace photontracer.photonmap
 						photons[j] = fooPhoton;
 						System.Object generatedAux = fooPhoton;
 						
-						if (i < storedPhotons_Renamed_Field)
+						if (i < storedPhotons_Field)
 						{
-							for (; foo <= storedPhotons_Renamed_Field; foo++)
+							for (; foo <= storedPhotons_Field; foo++)
 							{
 								if (pa1[foo] != null)
 								{
@@ -141,7 +141,7 @@ namespace photontracer.photonmap
 				}
 			}
 			
-			halfStoredPhotons = (storedPhotons_Renamed_Field / 2) - 1;
+			halfStoredPhotons = (storedPhotons_Field / 2) - 1;
 		}
 		
 		private void  medianSplit(Photon[] p, int left, int right, int median, int axis)
@@ -150,16 +150,16 @@ namespace photontracer.photonmap
 			
 			while (right > left)
 			{
-				double v = p[right].position.get_Renamed(axis);
+				double v = p[right].position.get(axis);
 				
 				int i = left - 1;
 				int j = right;
 				
 				for (; ; )
 				{
-					while (p[++i].position.get_Renamed(axis) < v)
+					while (p[++i].position.get(axis) < v)
 						;
-					while (p[--j].position.get_Renamed(axis) > v && j > left)
+					while (p[--j].position.get(axis) > v && j > left)
 						;
 					
 					if (i >= j)
@@ -233,11 +233,11 @@ namespace photontracer.photonmap
 				// balance left segment
 				if (start < (median - 1))
 				{
-					double temp = bboxMax.get_Renamed(axis);
+					double temp = bboxMax.get(axis);
 					
-					bboxMax.set_Renamed(axis, pbal[index].position.get_Renamed(axis));
+					bboxMax.set(axis, pbal[index].position.get(axis));
 					balanceSegment(pbal, porg, (2 * index), start, (median - 1));
-					bboxMax.set_Renamed(axis, temp);
+					bboxMax.set(axis, temp);
 				}
 				else
 				{
@@ -250,11 +250,11 @@ namespace photontracer.photonmap
 				// balance right segment
 				if ((median + 1) < end)
 				{
-					double temp = bboxMin.get_Renamed(axis);
+					double temp = bboxMin.get(axis);
 					
-					bboxMin.set_Renamed(axis, pbal[index].position.get_Renamed(axis));
+					bboxMin.set(axis, pbal[index].position.get(axis));
 					balanceSegment(pbal, porg, (2 * index) + 1, (median + 1), end);
-					bboxMin.set_Renamed(axis, temp);
+					bboxMin.set(axis, temp);
 				}
 				else
 				{
@@ -267,7 +267,7 @@ namespace photontracer.photonmap
 		{
 			const int							interval = 500;
 			int									indexBegin, indexEnd;
-			precomputeRadianceWorkerThread[]	Threads = new precomputeRadianceWorkerThread[2]; // [2] for hyperthreading!!
+			precomputeRadianceWorkerThread[]	Threads = new precomputeRadianceWorkerThread[4];
 
 			for (int i = 0; i < Threads.Length; i++)
 			{
@@ -336,7 +336,7 @@ namespace photontracer.photonmap
 			private float			maxDist;
 			private int				noPhotons;
 			private PhotonMap		mainInstance;
-			private bool			done;
+			private volatile bool	done;
 
 			public precomputeRadianceWorkerThread (int iBegin, int iEnd, float maxDist, int noPhotons, PhotonMap main)
 			{
@@ -350,10 +350,7 @@ namespace photontracer.photonmap
 		
 			public bool isDone () 
 			{ 
-				lock (this)
-				{
-					return  done;
-				}
+                return  done;
 			}
 
 			public void ThreadProc ()
@@ -402,27 +399,23 @@ namespace photontracer.photonmap
 			{
 				Photon p = getPhoton(np.indices[1]);
 				
-				rad.set_Renamed(p.accumPower);
+				rad.set(p.accumPower);
 			}
 			else
 			{
-				rad.set_Renamed(0.0f);
+				rad.set(0.0f);
 			}
 		}
 		
 		public virtual void  irradianceEstimate(RGBColor irrad, Vector3D position, Vector3D normal, float maxDist, int noPhotons)
 		{
-			//UPGRADE_NOTE: Final was removed from the declaration of 'ALPHA '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
 			float ALPHA = 0.918f;
-			//UPGRADE_NOTE: Final was removed from the declaration of 'MBETA '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
 			float MBETA = - 1.953f;
-			//UPGRADE_NOTE: Final was removed from the declaration of 'DENOMFACTOR '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			float DENOMFACTOR = 1.0f / (1.0f - (float) System.Math.Exp(MBETA));
 			
 			NearestPhotons np = new NearestPhotons(noPhotons, maxDist, position);
 			
-			irrad.set_Renamed(0.0f);
+			irrad.set(0.0f);
 			
 			// locate the nearest photons
 			locatePhotons(np, 1);
@@ -435,7 +428,6 @@ namespace photontracer.photonmap
 			
 			Vector3D direction = new Vector3D();
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			float mittrs = MBETA / (2.0f * (float) np.dist2[0]);
 			
 			// sum irrandiance from all photons
@@ -449,7 +441,6 @@ namespace photontracer.photonmap
 				
 				if (direction.dot(normal) < 0.0)
 				{
-					//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 					float gaussWeight = 1.0f - (1.0f - (float) System.Math.Exp((float) p.position.distanceSqr(position) * mittrs)) * DENOMFACTOR;
 					
 					irrad.add(p.power.scaleNew(gaussWeight));
@@ -457,24 +448,19 @@ namespace photontracer.photonmap
 			}
 			
 			// estimate of density
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			irrad.scale(ALPHA / (float) (System.Math.PI * np.dist2[0]));
 		}
 		
 		// Lambertian! Replace with general BSDF.
 		public virtual void  radianceEstimate(RGBColor rad, Vector3D position, Vector3D normal, float maxDist, int noPhotons)
 		{
-			//UPGRADE_NOTE: Final was removed from the declaration of 'ALPHA '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
-			float ALPHA = 0.918f;
-			//UPGRADE_NOTE: Final was removed from the declaration of 'MBETA '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
+			//float ALPHA = 0.918f;
 			float MBETA = - 1.953f;
-			//UPGRADE_NOTE: Final was removed from the declaration of 'DENOMFACTOR '. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1003"'
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			float DENOMFACTOR = 1.0f / (1.0f - (float) System.Math.Exp(MBETA));
 			
 			NearestPhotons np = new NearestPhotons(noPhotons, maxDist, position);
 			
-			rad.set_Renamed(0.0f);
+			rad.set(0.0f);
 			
 			// locate the nearest photons
 			locatePhotons(np, 1);
@@ -487,7 +473,6 @@ namespace photontracer.photonmap
 			
 			Vector3D direction = new Vector3D();
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			//float mittrs = MBETA / (2.0f * (float) np.dist2[0]);
 			float kdenom = (float) (1.0 / (1.1 * Math.Sqrt (np.dist2[0])));
 			
@@ -502,13 +487,11 @@ namespace photontracer.photonmap
 				// if the scene does not have any thin surfaces
 				p.toCartesian(direction);
 				
-				//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 				cosNL = (float) direction.dot(normal);
 				//cosNL = -1.0f;
 				
 				if (cosNL < 0.0)
 				{
-					//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 					//float gaussWeight = 1.0f - (1.0f - (float) System.Math.Exp((float) p.position.distanceSqr(position) * mittrs)) * DENOMFACTOR;
 					float coneWeight = 1.0f - (float) (p.position.distance (position) * kdenom); 
 					
@@ -519,7 +502,6 @@ namespace photontracer.photonmap
 			}
 			
 			// estimate of density
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			//rad.scale(ALPHA / (float) (System.Math.PI * np.dist2[0]));
 			//rad.scale(1.0f / (float) (System.Math.PI * np.dist2[0]));
 			rad.scale(1.0f / (float) ((1.0f - 2.0f / (3.0f * 1.1f)) * System.Math.PI * np.dist2[0]));
@@ -532,7 +514,7 @@ namespace photontracer.photonmap
 			
 			if (index < halfStoredPhotons)
 			{
-				dist1 = np.position.get_Renamed(p.plane) - p.position.get_Renamed(p.plane);
+				dist1 = np.position.get(p.plane) - p.position.get(p.plane);
 				
 				if (dist1 > 0.0)
 				{
@@ -658,7 +640,7 @@ namespace photontracer.photonmap
 			
 			if (index < halfStoredPhotons)
 			{
-				dist1 = np.position.get_Renamed(p.plane) - p.position.get_Renamed(p.plane);
+				dist1 = np.position.get(p.plane) - p.position.get(p.plane);
 				
 				if (dist1 > 0.0)
 				{

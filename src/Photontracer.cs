@@ -11,44 +11,22 @@ using photontracer.photonmap;
 
 class Photontracer : SceneConstants
 {
-	//UPGRADE_NOTE: Field 'EnclosingInstance' was added to class 'AnonymousClassWindowAdapter' to access its enclosing instance. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1019"'
-	private class AnonymousClassWindowAdapter
-	{
-		public AnonymousClassWindowAdapter(Photontracer enclosingInstance)
-		{
-			InitBlock(enclosingInstance);
-		}
-		private void  InitBlock(Photontracer enclosingInstance)
-		{
-			this.enclosingInstance = enclosingInstance;
-		}
-		private Photontracer enclosingInstance;
-		public Photontracer Enclosing_Instance
-		{
-			get
-			{
-				return enclosingInstance;
-			}
-			
-		}
-		public void  windowClosing(System.Object event_sender, System.ComponentModel.CancelEventArgs evt)
-		{
-			Debug.WriteLine("\r\nBye!");
-			Trace.Flush();
-			
-			System.Environment.Exit(0);
-		}
-	}
-	//UPGRADE_NOTE: Field 'EnclosingInstance' was added to class 'AnonymousClassWindowAdapter1' to access its enclosing instance. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1019"'
+    public void  windowClosing(System.Object event_sender, System.ComponentModel.CancelEventArgs evt)
+    {
+        Debug.WriteLine("\r\nBye!");
+        Trace.Flush();
+        
+        System.Environment.Exit(0);
+    }
+
 	private Scene scene;
 	private Camera camera;
 	private Image image, imagePhotons;
 	private PhotonMap causticsmap;
 	private PhotonMap photonmap;
 	private IrradianceCache irradianceCache;
-	private System.Collections.ArrayList objectList;
+	private System.Collections.ArrayList primitiveList;
 	private System.Collections.ArrayList lightList;
-	//UPGRADE_TODO: Class 'javax.swing.JFrame' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 	private System.Windows.Forms.Form  window, windowPhotons;
 
 	private int noShadowRays, noIrradianceRays, noReflectionRays, noTransmissionRays, noPrimaryRayHits, noPrimaryRays;
@@ -63,7 +41,7 @@ class Photontracer : SceneConstants
 		Sphere sph1, sph2, sph3, sph4, sph5, sph6, sph7, sph8, sph9;
 		Cylinder cyl1, cyl2;
 		Ring ring1;
-		Light light1, light2, light3;
+		//Light light1, light2, light3;
 		TriangleAreaLight arealight1, arealight2;
 		Vertex roofv1, roofv2, roofv3, roofv4;
 		Vertex v1, v2, v3, v4;
@@ -73,13 +51,13 @@ class Photontracer : SceneConstants
 		Triangle rooftri1, rooftri2;
 		Triangle []cubetri1 = null;
 		Triangle []cubetri2 = null;
-		Material redReflectivePlastic, bluePlastic, blueGlass, ground, mirror;
+		//Material redReflectivePlastic, bluePlastic, blueGlass, ground, mirror;
 		Material redWall, blueWall, whiteWall, yellowWall, cyanWall;
 		Material metal, glass;
 		Material lightmat;
 		CheckerMaterial checker, mirrorChecker;
 		TextureMaterial textureGrass;
-		Bump bump;
+		//Bump bump;
 		System.DateTime before, after;
 		
 		scene = new Scene();
@@ -173,7 +151,7 @@ class Photontracer : SceneConstants
 
 		//
 		//
-		// Object creation
+		// primitive creation
 		//
 		//
 
@@ -256,7 +234,7 @@ class Photontracer : SceneConstants
 
 		//
 		//
-		// Scene setup (add objects)
+		// Scene setup (add primitives)
 		//
 		//
 
@@ -307,18 +285,14 @@ class Photontracer : SceneConstants
 		image = new Image(width, height);
 		imagePhotons = new Image(width, height);
 	
-		//UPGRADE_TODO: Constructor 'javax.swing.JFrame.JFrame' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 		window = new System.Windows.Forms.Form ();
 		window.Text = "Rendering";
-		//UPGRADE_TODO: Constructor 'javax.swing.JFrame.JFrame' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 		windowPhotons = new System.Windows.Forms.Form ();
 		windowPhotons.Text = "Photon Positions";
 
-		window.Closing += new System.ComponentModel.CancelEventHandler(new AnonymousClassWindowAdapter(this).windowClosing);
-		windowPhotons.Closing += new System.ComponentModel.CancelEventHandler(new AnonymousClassWindowAdapter(this).windowClosing);
+		window.Closing += new System.ComponentModel.CancelEventHandler(windowClosing);
+		windowPhotons.Closing += new System.ComponentModel.CancelEventHandler(windowClosing);
 		
-		//UPGRADE_TODO: Method 'java.awt.Container.add' was converted to 'System.Windows.Forms.ContainerControl.Controls.Add' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		//UPGRADE_TODO: Method 'javax.swing.JFrame.getContentPane' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 		//window.getContentPane().Controls.Add(image);
 		//window.TopLevel = true;
 		//window.Controls.Add(image);
@@ -330,37 +304,28 @@ class Photontracer : SceneConstants
 		//image.setDimensions (100,100);
 		//window = image;
 
-		//UPGRADE_TODO: Method 'java.awt.Container.add' was converted to 'System.Windows.Forms.ContainerControl.Controls.Add' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		//UPGRADE_TODO: Method 'javax.swing.JFrame.getContentPane' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 		//windowPhotons.Controls.Add(imagePhotons);
 		//windowPhotons.Controls.Add (imagePhotons);
 		windowPhotons.Controls.Add (imagePhotons);
 		windowPhotons.ClientSize = imagePhotons.Size;
 		
-		//UPGRADE_ISSUE: Method 'java.awt.Window.pack' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1000_javaawtWindowpack"'
 		//window.pack();
 		window.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-		//UPGRADE_TODO: Method 'java.awt.Component.setVisible' was converted to 'System.Windows.Forms.Control.Visible' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		//UPGRADE_TODO: System.Windows.Forms.Application.Run must be called to start a main form. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1135"'
 		window.Visible = true;
 		
-		//UPGRADE_ISSUE: Method 'java.awt.Window.pack' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1000_javaawtWindowpack"'
 		//windowPhotons.pack();
 		windowPhotons.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-		//UPGRADE_TODO: Method 'java.awt.Component.setVisible' was converted to 'System.Windows.Forms.Control.Visible' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		//UPGRADE_TODO: System.Windows.Forms.Application.Run must be called to start a main form. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1135"'
 		windowPhotons.Visible = true;
 		
 		image.initializeFramebuffer();
 		imagePhotons.initializeFramebuffer();
 		
-		//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 		Trace.WriteLine(image);
 
 		//window.Refresh ();
 		//window.
 		
-		objectList = scene.primitiveList();
+		primitiveList = scene.primitiveList();
 		lightList = scene.lightList();
 	
 		// sample and trace photons
@@ -397,7 +362,6 @@ class Photontracer : SceneConstants
 		timeDiff = after - before;
 		Trace.WriteLine("\r\nElapsed: " + timeDiff.TotalMilliseconds / 1000.0 + " secs.\r\n");
 		
-		//UPGRADE_TODO: The equivalent in .NET for method 'java.lang.Object.toString' may return a different value. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1043"'
 		Trace.WriteLine(this + "\r\n");
 
 		image.saveJPEG(outputFilename);
@@ -485,7 +449,7 @@ class Photontracer : SceneConstants
 	{
 		int y, height;
 		double v, stepV;
-		double halfStepV;
+		//double halfStepV;
 		
 		noShadowRays = 0;
 		noIrradianceRays = 0;
@@ -505,7 +469,7 @@ class Photontracer : SceneConstants
 		Trace.Write("\r\nRendering.");
 		
 		//
-		ScanlineWorkerThread[]	Threads = new ScanlineWorkerThread[2]; // [2] for hyperthreading!!
+		ScanlineWorkerThread[]	Threads = new ScanlineWorkerThread[4];
 	
 		for (int i = 0; i < Threads.Length; i++)
 		{
@@ -803,7 +767,6 @@ class Photontracer : SceneConstants
 			{
 				//Trace.WriteLine (u + " " + v);
 
-				//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 				//imagePhotons.setPixel((int) (halfWidth + (2.0 * halfWidth * u / uvCorrection)), (int) (halfHeight - (2.0 * halfHeight * v)), RGBColor.RGBwhite());
 				//imagePhotons.setPixel((int) (halfWidth + (2.0 * halfWidth * u / uvCorrection)), (int) (halfHeight - (2.0 * halfHeight * v)), RGBColor.RGByellow());
 
@@ -863,7 +826,7 @@ class Photontracer : SceneConstants
 				vi.Y = cosPhi; //Math.sin(phi + Math.PI * 0.5);
 				vi.Z = 0.0;
 				onb.transform(vi);
-				rotGradientTemp.set_Renamed (RGBColor.RGBblack());
+				rotGradientTemp.set (RGBColor.RGBblack());
 				ui.X = cosPhi;
 				ui.Y = sinPhi;
 				ui.Z = 0.0;
@@ -873,8 +836,8 @@ class Photontracer : SceneConstants
 				vim.Y = Math.Sin(phim + (Math.PI * 0.5));
 				vim.Z = 0.0;
 				onb.transform(vim);
-				transGradient1Temp.set_Renamed (RGBColor.RGBblack());
-				transGradient2Temp.set_Renamed (RGBColor.RGBblack());
+				transGradient1Temp.set (RGBColor.RGBblack());
+				transGradient2Temp.set (RGBColor.RGBblack());
 				for (int j = 0; j < (irrM / 1); j++) 
 				{
 					//System.Console.Out.WriteLine (SupportClass.Random.NextDouble());
@@ -910,7 +873,7 @@ class Photontracer : SceneConstants
 							invR += (1.0 / Math.Sqrt (rij));
 							hits++;
 							System.Threading.Interlocked.Increment (ref noIrradianceRays);
-							lij.set_Renamed (traceRay (sampleRay, depth - 1, true));
+							lij.set (traceRay (sampleRay, depth - 1, true));
 
 							//double		ang = ((double) i / (double)irrN) * Math.PI * 2.0;
 							//double		rad = (j + 1) * 5.0;
@@ -919,10 +882,10 @@ class Photontracer : SceneConstants
 
 							//Vector3D v1 = sampleRay.direction();
 							//Vector3D v1 = N;
-							//Vector3D v2 = closestIntersection.intersectedObject().normal (closestIntersection.intersectionPoint());
+							//Vector3D v2 = closestIntersection.intersectedprimitive().normal (closestIntersection.intersectionPoint());
 							//double CosAng = -v1.dot(v2);
 							//if (CosAng < 0) CosAng = 0;
-							//lij.scale ((float) -sampleRay.direction().dot(closestIntersection.intersectedObject().normal (closestIntersection.intersectionPoint())));
+							//lij.scale ((float) -sampleRay.direction().dot(closestIntersection.intersectedprimitive().normal (closestIntersection.intersectionPoint())));
 							//lij.scale ((float) CosAng);
 
 							irr.add(lij);
@@ -948,7 +911,7 @@ class Photontracer : SceneConstants
 						}
 						//else
 						{
-							//lij.set_Renamed (0);
+							//lij.set (0);
 							//rij = Double.PositiveInfinity;
 						}
 					}
@@ -988,14 +951,14 @@ class Photontracer : SceneConstants
 					else 
 					{
 						r0[j] = rij;
-						l0[j].set_Renamed (lij);
+						l0[j].set (lij);
 					}
 
 					// set previous
 					rijm = rij;
-					lijm.set_Renamed (lij);
+					lijm.set (lij);
 					rim[j] = rij;
-					lim[j].set_Renamed (lij);
+					lim[j].set (lij);
 				}
 
 				// increment rotational gradient vector
@@ -1021,7 +984,7 @@ class Photontracer : SceneConstants
 			vim.Z = 0.0;
 			onb.transform(vim);
 			//Trace.WriteLine (vim.dot (N));
-			transGradient2Temp.set_Renamed (RGBColor.RGBblack());
+			transGradient2Temp.set (RGBColor.RGBblack());
 			for (int j = 0; j < (irrM / 1); j++) 
 			{
 				double sinThetam = Math.Sqrt((double) j / irrM);
@@ -1049,7 +1012,7 @@ class Photontracer : SceneConstants
 			scale = Math.PI / (irrM * irrN);
 //			scale = 1.0 / (irrM * irrN);
 			irr.scale((float) scale / (float) Math.PI);
-			//irr.set_Renamed (new RGBColor((float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble()));
+			//irr.set (new RGBColor((float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble()));
 			rotGradient[0].scale((float) scale);
 			rotGradient[1].scale((float) scale);
 			rotGradient[2].scale((float) scale);
@@ -1149,12 +1112,12 @@ class Photontracer : SceneConstants
 
 			if (bOK == false) 
 			{
-				transGradient1[0].set_Renamed (0);
-				transGradient1[1].set_Renamed (0);
-				transGradient1[2].set_Renamed (0);
-				rotGradient[0].set_Renamed (0);
-				rotGradient[1].set_Renamed (0);
-				rotGradient[2].set_Renamed (0);
+				transGradient1[0].set (0);
+				transGradient1[1].set (0);
+				transGradient1[2].set (0);
+				rotGradient[0].set (0);
+				rotGradient[1].set (0);
+				rotGradient[2].set (0);
 			}
 
 			//if (depth == 2) 
@@ -1227,10 +1190,9 @@ class Photontracer : SceneConstants
 			Primitive	LightObj;
 			int			acceptedLightRays;
 
-			//UPGRADE_TODO: Method 'java.util.Enumeration.nextElement' was converted to 'System.Collections.IEnumerator.Current' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 			Light light = (Light) elem.Current;
 	
-			directSum.set_Renamed (0);
+			directSum.set (0);
 			acceptedLightRays = 0;
 	
 			for (int i = 0 ; i < light.v_samples (); i++)
@@ -1260,7 +1222,7 @@ class Photontracer : SceneConstants
 		
 						if (inSight)
 						{
-							directContribution.set_Renamed (light.color(P));
+							directContribution.set (light.color(P));
 							directContribution.scale ((float) Math.Max(0.0, N.dot (L)));
 
 							// scale for point light source
@@ -1279,7 +1241,7 @@ class Photontracer : SceneConstants
 		caustics.add (causticsRadianceEstimate (P, N));
 
 		// using irradiance cache
-		diffuse.set_Renamed (getIrradiance (P, N, depth));
+		diffuse.set (getIrradiance (P, N, depth));
 
 		// Sum contributions
 		totalRadiance.add (directIllum);
@@ -1305,13 +1267,13 @@ class Photontracer : SceneConstants
 
 	internal virtual RGBColor traceRay(Ray ray, int depth, bool hasBeenDiffuselyReflected)
 	{
-		Ray shadowRay, reflectedRay, transmittedRay;
-		Primitive object_Renamed;
+		Ray /* shadowRay,*/ reflectedRay, transmittedRay;
+		Primitive primitive;
 		Material material;
 		Intersection closestIntersection;
 		RGBColor localColor, diffSpecColor, transmittedColor;
-		Vector3D P, PL, N, L, V, H, R, T, localPoint;
-		double cosNL, cosNH, cosVN, cosSqr, nMedia;
+		Vector3D P, PL, N, V, R, T, localPoint;
+		double cosVN, cosSqr, nMedia;
 		
 		if (depth == 0)
 		{
@@ -1330,17 +1292,17 @@ class Photontracer : SceneConstants
 			return scene.background();
 		}
 		
-		object_Renamed = closestIntersection.intersectedObject();
-		material = object_Renamed.material();
+		primitive = closestIntersection.intersectedObject();
+		material = primitive.material();
 		
 		P = closestIntersection.intersectionPoint();
-		N = object_Renamed.normal(P, ray.Location);
+		N = primitive.normal(P, ray.Location);
 		V = ray.direction();
 		
-		PL = P.subNew(object_Renamed.position());
-		localPoint = object_Renamed.mapTextureCoordinate(PL);
+		PL = P.subNew(primitive.position());
+		localPoint = primitive.mapTextureCoordinate(PL);
 		
-		N = material.perturbNormal(N, PL, object_Renamed);
+		N = material.perturbNormal(N, PL, primitive);
 		//N.normalize();
 		
 		// ambient light
@@ -1428,22 +1390,19 @@ class Photontracer : SceneConstants
 	internal virtual bool isInSight(Ray ray, double maxDistance, Primitive LightPrimitive)
 	{
 		Intersection currentIntersection;
-		Vector3D localPoint;
 		bool didIntersect;
 		
 		System.Threading.Interlocked.Increment (ref noShadowRays);
 		
 		currentIntersection = new Intersection();
 		
-		//UPGRADE_TODO: Method 'java.util.Enumeration.hasMoreElements' was converted to 'System.Collections.IEnumerator.MoveNext' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		for (System.Collections.IEnumerator elem = objectList.GetEnumerator(); elem.MoveNext(); )
+		for (System.Collections.IEnumerator elem = primitiveList.GetEnumerator(); elem.MoveNext(); )
 		{
-			//UPGRADE_TODO: Method 'java.util.Enumeration.nextElement' was converted to 'System.Collections.IEnumerator.Current' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-			Primitive object_Renamed = (Primitive) elem.Current;
+			Primitive primitive = (Primitive) elem.Current;
 			
-			if ((LightPrimitive == null) || (object_Renamed != LightPrimitive))
+			if ((LightPrimitive == null) || (primitive != LightPrimitive))
 			{
-				didIntersect = object_Renamed.intersect(ray, currentIntersection);
+				didIntersect = primitive.intersect(ray, currentIntersection);
 			
 				if (didIntersect)
 				{
@@ -1463,19 +1422,17 @@ class Photontracer : SceneConstants
 	internal virtual Intersection findClosestIntersection(Ray ray)
 	{
 		Intersection closestIntersection, currentIntersection;
-		Primitive object_Renamed;
+		Primitive primitive;
 		bool didIntersect = false;
 		
 		closestIntersection = null;
 		currentIntersection = new Intersection();
 		
-		//UPGRADE_TODO: Method 'java.util.Enumeration.hasMoreElements' was converted to 'System.Collections.IEnumerator.MoveNext' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-		for (System.Collections.IEnumerator elem = objectList.GetEnumerator(); elem.MoveNext(); )
+		for (System.Collections.IEnumerator elem = primitiveList.GetEnumerator(); elem.MoveNext(); )
 		{
-			//UPGRADE_TODO: Method 'java.util.Enumeration.nextElement' was converted to 'System.Collections.IEnumerator.Current' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
-			object_Renamed = (Primitive) elem.Current;
+			primitive = (Primitive) elem.Current;
 			
-			didIntersect = object_Renamed.intersect(ray, currentIntersection);
+			didIntersect = primitive.intersect(ray, currentIntersection);
 			
 			if (didIntersect)
 			{
@@ -1483,7 +1440,7 @@ class Photontracer : SceneConstants
 				{
 					if (currentIntersection.lambda() < closestIntersection.lambda())
 					{
-						closestIntersection.set_Renamed(currentIntersection);
+						closestIntersection.set(currentIntersection);
 					}
 				}
 				else
@@ -1499,7 +1456,6 @@ class Photontracer : SceneConstants
 	internal virtual void  sampleLights()
 	{
 		Camera camera;
-		Intersection closestIntersection;
 		double halfWidth, halfHeight;
 		double uvCorrection;
 		
@@ -1517,10 +1473,8 @@ class Photontracer : SceneConstants
 		
 		uvCorrection = (halfWidth / halfHeight) * 0.9375;
 		
-		//UPGRADE_TODO: Method 'java.util.Enumeration.hasMoreElements' was converted to 'System.Collections.IEnumerator.MoveNext' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 		for (System.Collections.IEnumerator elem = lightList.GetEnumerator(); elem.MoveNext(); )
 		{
-			//UPGRADE_TODO: Method 'java.util.Enumeration.nextElement' was converted to 'System.Collections.IEnumerator.Current' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 			Light light = (Light) elem.Current;
 			
 			Trace.WriteLine("Tracing " + light.photons() + " photons.");
@@ -1564,7 +1518,6 @@ class Photontracer : SceneConstants
 							
 							if (closest.intersectionPoint().distanceSqr(p.position) < photontracer.SceneConstants_Fields.EPSILON)
 							{
-								//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 								imagePhotons.setPixel((int) (halfWidth + (2.0 * halfWidth * u / uvCorrection)), (int) (halfHeight - (2.0 * halfHeight * v)), RGBColor.RGBwhite());
 								//imagePhotons.setPixel((int) (halfWidth + (2.0 * halfWidth * u / uvCorrection)), (int) (halfHeight - (2.0 * halfHeight * v)), p.power);
 							}
@@ -1581,7 +1534,6 @@ class Photontracer : SceneConstants
 				}
 			}
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			causticsmap.scalePhotonPower(1.0f / (float) light.photons());
 			photonmap.scalePhotonPower(1.0f / (float) light.photons());
 		}
@@ -1609,7 +1561,7 @@ class Photontracer : SceneConstants
 			
 		if (H1.distanceSqr(N) < photontracer.SceneConstants_Fields.EPSILON)
 		{
-			H1.set_Renamed(0.0, 0.0, 1.0);
+			H1.set(0.0, 0.0, 1.0);
 		}
 			
 		Vector3D H2 = N.cross(H1);
@@ -1627,13 +1579,12 @@ class Photontracer : SceneConstants
 	internal virtual void  tracePhoton(Ray ray, RGBColor power, int depth, bool wasSpecularlyReflected, bool hasBeenCausticsAbsorbed)
 	{
 		Ray reflectedRay, transmittedRay;
-		Primitive object_Renamed;
+		Primitive primitive;
 		Material material;
 		Intersection closestIntersection;
-		Vector3D P, PL, N, L, V, R, D, T, localPoint;
+		Vector3D P, PL, N, V, R, T, localPoint;
 		RGBColor newPower;
-		RGBColor matColor;
-		double cosNL, cosNH, cosVN, cosSqr, nMedia;
+		double cosVN, cosSqr, nMedia;
 		float diffuseCoef, reflectCoef, transCoef, total, rand;
 		
 		if (depth == 0)
@@ -1654,17 +1605,17 @@ class Photontracer : SceneConstants
 			return;
 		}
 
-		object_Renamed = closestIntersection.intersectedObject();
-		material = object_Renamed.material();
+		primitive = closestIntersection.intersectedObject();
+		material = primitive.material();
 		
 		P = closestIntersection.intersectionPoint();
-		N = object_Renamed.normal(P, ray.Location);
+		N = primitive.normal(P, ray.Location);
 		V = ray.direction();
 		
-		PL = P.subNew(object_Renamed.position());
-		localPoint = object_Renamed.mapTextureCoordinate(PL);
+		PL = P.subNew(primitive.position());
+		localPoint = primitive.mapTextureCoordinate(PL);
 		
-		N = material.perturbNormal(N, PL, object_Renamed);
+		N = material.perturbNormal(N, PL, primitive);
 		//N.normalize();
 		
 		diffuseCoef = material.absorbationCoef(localPoint);
@@ -1672,7 +1623,6 @@ class Photontracer : SceneConstants
 		transCoef = material.transmissionCoef(localPoint);
 		total = diffuseCoef + reflectCoef + transCoef;
 	
-		//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 		rand = (float) SupportClass.Random.NextDouble() * (1 + transCoef);
 		
 		cosVN = - V.dot(N);
@@ -1683,7 +1633,7 @@ class Photontracer : SceneConstants
 			if ((wasSpecularlyReflected == true) && (hasBeenCausticsAbsorbed == false))
 			{
 				// store photon in caustics map
-				//!!!! bør bare være power
+				//!!!! bï¿½r bare vï¿½re power
 				causticsmap.store(power, P, V, N);
 				//causticsmap.store(power.scaleNew(material.diffuseColor(localPoint)), P, V, N);
 
@@ -1788,6 +1738,7 @@ class Photontracer : SceneConstants
 		}
 		catch (System.FormatException ne)
 		{
+            Trace.WriteLine(ne);
 			Trace.WriteLine("Warning: parse error! Using default parameters instead.\r\n");
 			
 			new Photontracer();
@@ -1796,7 +1747,6 @@ class Photontracer : SceneConstants
 	
 	public override System.String ToString()
 	{
-		//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 		int percentage = (int) (noPrimaryRayHits * 100.0 / noPrimaryRays);
 		
 		return new System.Text.StringBuilder("[Photontracer] -" + "\r\n  Primary ray hits      : " + noPrimaryRayHits + "/" + noPrimaryRays + " (~" + percentage + "%)" + "\r\n  Shadow rays shot      : " + noShadowRays  + "\r\n  Irradiance rays shot  : " + noIrradianceRays + "\r\n  Reflection rays shot  : " + noReflectionRays + "\r\n  Transmission rays shot: " + noTransmissionRays).ToString();

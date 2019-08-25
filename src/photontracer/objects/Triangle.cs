@@ -165,7 +165,6 @@ namespace photontracer.objects
 		
 		public override System.String ToString()
 		{
-			//UPGRADE_TODO: The equivalent in .NET for method 'java.lang.Object.toString' may return a different value. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1043"'
 			return new System.Text.StringBuilder("[Triangle] -\n  Position: " + position()).ToString();
 		}
 	}

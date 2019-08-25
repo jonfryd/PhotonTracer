@@ -91,9 +91,9 @@ namespace photontracer
 			}
 			while ((dx * dx + dy * dy + dz * dz) > 1.0);
 			
-			pos.set_Renamed(v0.p.addNew (edge1.scaleNew (u).addNew (edge2.scaleNew (v))));
-			ori.set_Renamed(dx, dy, dz);
-			power.set_Renamed(getFinalColor ());
+			pos.set(v0.p.addNew (edge1.scaleNew (u).addNew (edge2.scaleNew (v))));
+			ori.set(dx, dy, dz);
+			power.set(getFinalColor ());
 		}
 	}
 }

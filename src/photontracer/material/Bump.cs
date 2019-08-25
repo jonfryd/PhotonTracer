@@ -4,6 +4,7 @@ using SceneConstants = photontracer.SceneConstants;
 using Vector3D = photontracer.math.Vector3D;
 using RGBColor = photontracer.misc.RGBColor;
 using Primitive = photontracer.objects.Primitive;
+
 namespace photontracer.material
 {
 	
@@ -13,7 +14,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.source_Renamed_Field = value;
+				this.source_Field = value;
 			}
 			
 		}
@@ -21,7 +22,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.gradDisp_Renamed_Field = value;
+				this.gradDisp_Field = value;
 			}
 			
 		}
@@ -29,7 +30,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.bumpFactor_Renamed_Field = value;
+				this.bumpFactor_Field = value;
 			}
 			
 		}
@@ -37,14 +38,14 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.samples_Renamed_Field = value;
+				this.samples_Field = value;
 			}
 			
 		}
-		private Material source_Renamed_Field;
-		private Vector3D gradDisp_Renamed_Field;
-		private float bumpFactor_Renamed_Field;
-		private Vector3D samples_Renamed_Field;
+		private Material source_Field;
+		private Vector3D gradDisp_Field;
+		private float bumpFactor_Field;
+		private Vector3D samples_Field;
 		
 		public Bump()
 		{
@@ -70,9 +71,9 @@ namespace photontracer.material
 			Samples = new Vector3D(other.samples());
 		}
 		
-		public virtual Vector3D perturbNormal(Vector3D normal, Vector3D localPoint, Primitive object_Renamed)
+		public virtual Vector3D perturbNormal(Vector3D normal, Vector3D localPoint, Primitive primitive)
 		{
-			RGBColor color, basisColor;
+			RGBColor color;
 			Vector3D newNormal;
 			Vector3D gradientU;
 			Vector3D gradientV;
@@ -111,7 +112,7 @@ namespace photontracer.material
 			gradientU = r.scaleNew(gradDisp().x());
 			gradientV = t.scaleNew(gradDisp().y());
 			
-			color = source().diffuseColor(object_Renamed.mapTextureCoordinate(localPoint));
+			color = source().diffuseColor(primitive.mapTextureCoordinate(localPoint));
 			height = color.average();
 			
 			dx = (samples().x() > 1.0)?(2.0 / (samples().x() - 1.0)):0;
@@ -125,7 +126,6 @@ namespace photontracer.material
 			
 			y = - 1.0;
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			for (int iy = 0; iy < (int) samples().y(); iy++)
 			{
 				tDampingAbs = (1.0 - (y * y) * 0.8);
@@ -139,14 +139,13 @@ namespace photontracer.material
 				
 				x = - 1.0;
 				
-				//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 				for (int ix = 0; ix < (int) samples().x(); ix++)
 				{
 					temp = gradientU.scaleNew(x);
 					temp.add(gradientV.scaleNew(y));
 					temp.add(localPoint);
 					
-					color = source().diffuseColor(object_Renamed.mapTextureCoordinate(temp));
+					color = source().diffuseColor(primitive.mapTextureCoordinate(temp));
 					
 					heightDiff = height - color.average();
 					
@@ -184,22 +183,22 @@ namespace photontracer.material
 		
 		public virtual Material source()
 		{
-			return source_Renamed_Field;
+			return source_Field;
 		}
 		
 		public virtual Vector3D gradDisp()
 		{
-			return gradDisp_Renamed_Field;
+			return gradDisp_Field;
 		}
 		
 		public virtual float bumpFactor()
 		{
-			return bumpFactor_Renamed_Field;
+			return bumpFactor_Field;
 		}
 		
 		public virtual Vector3D samples()
 		{
-			return samples_Renamed_Field;
+			return samples_Field;
 		}
 	}
 }

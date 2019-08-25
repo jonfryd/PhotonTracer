@@ -12,7 +12,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.ambientColor_Renamed_Field = value;
+				this.ambientColor_Field = value;
 			}
 			
 		}
@@ -20,10 +20,10 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.diffuseColor_Renamed_Field = value;
+				this.diffuseColor_Field = value;
 
-				absorbationCoef_Renamed_Field = value.average();
-				isAbsorbing_Renamed_Field = (absorbationCoef_Renamed_Field > 0)?true:false;
+				absorbationCoef_Field = value.average();
+				isAbsorbing_Field = (absorbationCoef_Field > 0)?true:false;
 			}
 			
 		}
@@ -31,10 +31,10 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.specularColor_Renamed_Field = value;
+				this.specularColor_Field = value;
 				
-				reflectionCoef_Renamed_Field = value.average();
-				isReflective_Renamed_Field = (reflectionCoef_Renamed_Field > 0)?true:false;
+				reflectionCoef_Field = value.average();
+				isReflective_Field = (reflectionCoef_Field > 0)?true:false;
 			}
 			
 		}
@@ -42,10 +42,10 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.transmissionColor_Renamed_Field = value;
+				this.transmissionColor_Field = value;
 				
-				transmissionCoef_Renamed_Field = value.average ();
-				isTransparent_Renamed_Field = (transmissionCoef_Renamed_Field > 0)?true:false;
+				transmissionCoef_Field = value.average ();
+				isTransparent_Field = (transmissionCoef_Field > 0)?true:false;
 			}
 			
 		}
@@ -53,7 +53,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.phongExponent_Renamed_Field = value;
+				this.phongExponent_Field = value;
 			}
 			
 		}
@@ -61,23 +61,23 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.bump_Renamed_Field = value;
+				this.bump_Field = value;
 			}
 			
 		}
-		private RGBColor ambientColor_Renamed_Field;
-		private RGBColor diffuseColor_Renamed_Field;
-		private RGBColor specularColor_Renamed_Field;
-		private RGBColor transmissionColor_Renamed_Field;
-		private float absorbationCoef_Renamed_Field;
-		private float reflectionCoef_Renamed_Field;
-		private float transmissionCoef_Renamed_Field;
-		private bool isAbsorbing_Renamed_Field;
-		private bool isReflective_Renamed_Field;
-		private bool isTransparent_Renamed_Field;
-		private float phongExponent_Renamed_Field;
-		private float IOR_Renamed_Field;
-		private Bump bump_Renamed_Field;
+		private RGBColor ambientColor_Field;
+		private RGBColor diffuseColor_Field;
+		private RGBColor specularColor_Field;
+		private RGBColor transmissionColor_Field;
+		private float absorbationCoef_Field;
+		private float reflectionCoef_Field;
+		private float transmissionCoef_Field;
+		private bool isAbsorbing_Field;
+		private bool isReflective_Field;
+		private bool isTransparent_Field;
+		private float phongExponent_Field;
+		private float IOR_Field;
+		private Bump bump_Field;
 		
 		public Material()
 		{
@@ -127,47 +127,47 @@ namespace photontracer.material
 		
 		public virtual RGBColor ambientColor()
 		{
-			return ambientColor_Renamed_Field;
+			return ambientColor_Field;
 		}
 		
 		public virtual RGBColor ambientColor(Vector3D localPoint)
 		{
-			return ambientColor_Renamed_Field;
+			return ambientColor_Field;
 		}
 		
 		public virtual RGBColor diffuseColor()
 		{
-			return diffuseColor_Renamed_Field;
+			return diffuseColor_Field;
 		}
 		
 		public virtual RGBColor diffuseColor(Vector3D localPoint)
 		{
-			return diffuseColor_Renamed_Field;
+			return diffuseColor_Field;
 		}
 		
 		public virtual RGBColor specularColor()
 		{
-			return specularColor_Renamed_Field;
+			return specularColor_Field;
 		}
 		
 		public virtual RGBColor specularColor(Vector3D localPoint)
 		{
-			return specularColor_Renamed_Field;
+			return specularColor_Field;
 		}
 		
 		public virtual RGBColor transmissionColor()
 		{
-			return transmissionColor_Renamed_Field;
+			return transmissionColor_Field;
 		}
 		
 		public virtual RGBColor transmissionColor(Vector3D localPoint)
 		{
-			return transmissionColor_Renamed_Field;
+			return transmissionColor_Field;
 		}
 		
 		public virtual float absorbationCoef()
 		{
-			return absorbationCoef_Renamed_Field;
+			return absorbationCoef_Field;
 		}
 		
 		public virtual float absorbationCoef(Vector3D localPoint)
@@ -177,7 +177,7 @@ namespace photontracer.material
 		
 		public virtual float reflectionCoef()
 		{
-			return reflectionCoef_Renamed_Field;
+			return reflectionCoef_Field;
 		}
 		
 		public virtual float reflectionCoef(Vector3D localPoint)
@@ -187,7 +187,7 @@ namespace photontracer.material
 
 		public virtual float transmissionCoef()
 		{
-			return transmissionCoef_Renamed_Field;
+			return transmissionCoef_Field;
 		}
 		
 		public virtual float transmissionCoef(Vector3D localPoint)
@@ -197,7 +197,7 @@ namespace photontracer.material
 		
 		public virtual bool isReflective()
 		{
-			return isReflective_Renamed_Field;
+			return isReflective_Field;
 		}
 		
 		public virtual bool isReflective(Vector3D localPoint)
@@ -207,7 +207,7 @@ namespace photontracer.material
 		
 		public virtual bool isAbsorbing()
 		{
-			return isAbsorbing_Renamed_Field;
+			return isAbsorbing_Field;
 		}
 		
 		public virtual bool isAbsorbing(Vector3D localPoint)
@@ -217,7 +217,7 @@ namespace photontracer.material
 
 		public virtual bool isTransparent()
 		{
-			return isTransparent_Renamed_Field;
+			return isTransparent_Field;
 		}
 		
 		public virtual bool isTransparent(Vector3D localPoint)
@@ -227,39 +227,39 @@ namespace photontracer.material
 
 		public virtual float phongExponent()
 		{
-			return phongExponent_Renamed_Field;
+			return phongExponent_Field;
 		}
 		
 		public virtual float phongExponent(Vector3D localPoint)
 		{
-			return phongExponent_Renamed_Field;
+			return phongExponent_Field;
 		}
 		
 		public virtual float IOR()
 		{
-			return IOR_Renamed_Field;
+			return IOR_Field;
 		}
 		
 		public virtual float IOR(Vector3D localPoint)
 		{
-			return IOR_Renamed_Field;
+			return IOR_Field;
 		}
 		
 		public virtual void  setIOR(float IOR)
 		{
-			this.IOR_Renamed_Field = IOR;
+			this.IOR_Field = IOR;
 		}
 		
 		public virtual Bump bump()
 		{
-			return bump_Renamed_Field;
+			return bump_Field;
 		}
 		
-		public virtual Vector3D perturbNormal(Vector3D normal, Vector3D localPoint, Primitive object_Renamed)
+		public virtual Vector3D perturbNormal(Vector3D normal, Vector3D localPoint, Primitive primitive)
 		{
-			if (bump_Renamed_Field != null)
+			if (bump_Field != null)
 			{
-				return bump_Renamed_Field.perturbNormal(normal, localPoint, object_Renamed);
+				return bump_Field.perturbNormal(normal, localPoint, primitive);
 			}
 			else
 			{

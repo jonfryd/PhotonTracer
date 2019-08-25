@@ -3,14 +3,12 @@ using System;
 namespace photontracer.misc
 {
 	
-	//UPGRADE_ISSUE: Class 'java.awt.Canvas' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1000_javaawtCanvas"'
 	public class Image:System.Windows.Forms.PictureBox 
 	{
 		private const int DEFWIDTH = 320;
 		private const int DEFHEIGHT = 240;
-		private int width_Renamed_Field, height_Renamed_Field;
+		private int width_Field, height_Field;
 		private RGBColor[][] pixels;
-		//UPGRADE_TODO: Class 'java.awt.image.BufferedImage' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 		private System.Drawing.Bitmap  offImg;
 
 		public Image():base()
@@ -25,12 +23,12 @@ namespace photontracer.misc
 
 		public virtual int width()
 		{
-			return width_Renamed_Field;
+			return width_Field;
 		}
 		
 		public virtual int height()
 		{
-			return height_Renamed_Field;
+			return height_Field;
 		}
 		
 		protected override System.Drawing.Size DefaultSize
@@ -43,10 +41,9 @@ namespace photontracer.misc
 
 		public virtual void  setDimensions(int width, int height)
 		{
-			this.width_Renamed_Field = width;
-			this.height_Renamed_Field = height;
+			this.width_Field = width;
+			this.height_Field = height;
 			
-			//UPGRADE_TODO: Method 'java.awt.Component.setSize' was converted to 'System.Windows.Forms.Control.Size' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 			Size = new System.Drawing.Size(width, height);
 			//SetClientSizeCore (width, height);
 			//SetBounds (0, 0, width, height);
@@ -58,20 +55,20 @@ namespace photontracer.misc
 		{
 			createFramebuffer();
 			
-			pixels = new RGBColor[width_Renamed_Field][];
-			for (int i = 0; i < width_Renamed_Field; i++)
+			pixels = new RGBColor[width_Field][];
+			for (int i = 0; i < width_Field; i++)
 			{
-				pixels[i] = new RGBColor[height_Renamed_Field];
+				pixels[i] = new RGBColor[height_Field];
 			}
 			
-			for (int i = 0; i < width_Renamed_Field; i++)
-				for (int j = 0; j < height_Renamed_Field; j++)
+			for (int i = 0; i < width_Field; i++)
+				for (int j = 0; j < height_Field; j++)
 					setPixel(i, j, new RGBColor());
 		}
 		
 		public virtual RGBColor getPixel(int x, int y)
 		{
-			if (x < 0 || x >= width_Renamed_Field || y < 0 || y >= height_Renamed_Field)
+			if (x < 0 || x >= width_Field || y < 0 || y >= height_Field)
 			{
 				System.Console.Out.WriteLine("Warning! (x,y) out of bounds.");
 				
@@ -83,14 +80,13 @@ namespace photontracer.misc
 		
 		public virtual void  setPixel(int x, int y, RGBColor color)
 		{
-			if (x < 0 || x >= width_Renamed_Field || y < 0 || y >= height_Renamed_Field)
+			if (x < 0 || x >= width_Field || y < 0 || y >= height_Field)
 			{
 				//System.out.println ("Warning! (x,y) out of bounds.");
 			}
 			else
 			{
 				RGBColor clampedColor, screenColor;
-				int biColor;
 				
 				pixels[x][y] = color;
 				
@@ -108,7 +104,7 @@ namespace photontracer.misc
 		
 		public virtual void  createFramebuffer()
 		{
-			offImg = new System.Drawing.Bitmap (width_Renamed_Field, height_Renamed_Field);
+			offImg = new System.Drawing.Bitmap (width_Field, height_Field);
 		}
 
 		protected override void OnPaintBackground(System.Windows.Forms.PaintEventArgs e) 
@@ -159,14 +155,13 @@ namespace photontracer.misc
 			}
 			catch (System.Exception e)
 			{
-				//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 				System.Console.Out.WriteLine(e);
 			}
 		}
 	
 		public override System.String ToString()
 		{
-			return new System.Text.StringBuilder("[Image] - <" + width_Renamed_Field + ", " + height_Renamed_Field + ">").ToString();
+			return new System.Text.StringBuilder("[Image] - <" + width_Field + ", " + height_Field + ">").ToString();
 		}
 
 	}

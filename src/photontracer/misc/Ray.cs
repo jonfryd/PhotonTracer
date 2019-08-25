@@ -22,7 +22,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.direction_Renamed_Field = value;
+				this.direction_Field = value;
 			}
 			
 		}
@@ -34,7 +34,7 @@ namespace photontracer.misc
 			}
 			
 		}
-		private Vector3D location, direction_Renamed_Field;
+		private Vector3D location, direction_Field;
 		
 		public Ray()
 		{
@@ -56,27 +56,26 @@ namespace photontracer.misc
 		
 		//public virtual Vector3D location()
 		//{
-		//	return location_Renamed_Field;
+		//	return location_Field;
 		//}
 		
 		public virtual Vector3D direction()
 		{
-			return direction_Renamed_Field;
+			return direction_Field;
 		}
 		
 		public virtual Vector3D destination()
 		{
-			return location.addNew(direction_Renamed_Field);
+			return location.addNew(direction_Field);
 		}
 		
 		public virtual void  normalize()
 		{
-			direction_Renamed_Field.normalize();
+			direction_Field.normalize();
 		}
 		
 		public override System.String ToString()
 		{
-			//UPGRADE_TODO: The equivalent in .NET for method 'java.lang.Object.toString' may return a different value. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1043"'
 			return new System.Text.StringBuilder("[Ray] -\n  Location:  " + location + "\n  Direction: " + direction()).ToString();
 		}
 	}

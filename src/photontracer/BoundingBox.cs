@@ -56,7 +56,7 @@ namespace photontracer
 		*/
 		public Vector3D getCenter() 
 		{
-			center.set_Renamed (minimum);
+			center.set (minimum);
 			center.add (maximum);
 			center.scale (1.0 / 2.0);
 
@@ -72,7 +72,7 @@ namespace photontracer
 		*/
 		public Vector3D getExtents() 
 		{
-			extents.set_Renamed (maximum);
+			extents.set (maximum);
 			extents.sub (minimum);
 
 			return extents;
@@ -191,10 +191,10 @@ namespace photontracer
 		{
 			Vector3D halfExtents = extents.scaleNew (1.0 / 2.0);
 
-			minimum.set_Renamed (center);
+			minimum.set (center);
 			minimum.sub (halfExtents);
 
-			maximum.set_Renamed (minimum);
+			maximum.set (minimum);
 			maximum.add (extents);
 		}
 	}

@@ -14,7 +14,7 @@ namespace photontracer
 		{
 			set
 			{
-				this.background_Renamed_Field = new RGBColor(value);
+				this.background_Field = new RGBColor(value);
 			}
 			
 		}
@@ -22,21 +22,21 @@ namespace photontracer
 		{
 			set
 			{
-				this.camera_Renamed_Field = value;
+				this.camera_Field = value;
 			}
 			
 		}
 
-		private System.Collections.ArrayList primitiveList_Renamed_Field;
-		private System.Collections.ArrayList lightList_Renamed_Field;
-		private RGBColor background_Renamed_Field;
-		private Camera camera_Renamed_Field;
+		private System.Collections.ArrayList primitiveList_Field;
+		private System.Collections.ArrayList lightList_Field;
+		private RGBColor background_Field;
+		private Camera camera_Field;
 		private BoundingBox boundingbox;
 		
 		public Scene()
 		{
-			primitiveList_Renamed_Field = new System.Collections.ArrayList(10);
-			lightList_Renamed_Field = new System.Collections.ArrayList(10);
+			primitiveList_Field = new System.Collections.ArrayList(10);
+			lightList_Field = new System.Collections.ArrayList(10);
 			
 			Background = RGBColor.RGBblue();
 			
@@ -47,34 +47,34 @@ namespace photontracer
 		
 		public virtual System.Collections.ArrayList primitiveList()
 		{
-			return primitiveList_Renamed_Field;
+			return primitiveList_Field;
 		}
 		
-		public virtual void  addPrimitive(Primitive object_Renamed)
+		public virtual void  addPrimitive(Primitive primitive)
 		{
-			primitiveList_Renamed_Field.Add(object_Renamed);
+			primitiveList_Field.Add(primitive);
 
-			boundingbox.include (object_Renamed.getBoundingBox ());
+			boundingbox.include (primitive.getBoundingBox ());
 		}
 		
 		public virtual System.Collections.ArrayList lightList()
 		{
-			return lightList_Renamed_Field;
+			return lightList_Field;
 		}
 		
 		public virtual void  addLight(Light light)
 		{
-			lightList_Renamed_Field.Add(light);
+			lightList_Field.Add(light);
 		}
 		
 		public virtual RGBColor background()
 		{
-			return background_Renamed_Field;
+			return background_Field;
 		}
 		
 		public virtual Camera camera()
 		{
-			return camera_Renamed_Field;
+			return camera_Field;
 		}
 
 		public virtual BoundingBox getBoundingBox()

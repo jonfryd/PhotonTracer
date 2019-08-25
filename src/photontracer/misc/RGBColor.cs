@@ -10,7 +10,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.red_Renamed_Field = value;
+				this.red_Field = value;
 			}
 			
 		}
@@ -18,7 +18,7 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.green_Renamed_Field = value;
+				this.green_Field = value;
 			}
 			
 		}
@@ -26,73 +26,64 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.blue_Renamed_Field = value;
+				this.blue_Field = value;
 			}
 			
 		}
-		//UPGRADE_NOTE: The initialization of  'RGBblack_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBblack_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBwhite_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBwhite_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBred_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBred_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBgreen_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBgreen_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBblue_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBblue_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGByellow_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGByellow_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBpurple_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBpurple_Renamed_Field;
-		//UPGRADE_NOTE: The initialization of  'RGBcyan_Renamed_Field' was moved to static method 'photontracer.misc.RGBColor'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private static RGBColor RGBcyan_Renamed_Field;
+		private static RGBColor RGBblack_Field;
+		private static RGBColor RGBwhite_Field;
+		private static RGBColor RGBred_Field;
+		private static RGBColor RGBgreen_Field;
+		private static RGBColor RGBblue_Field;
+		private static RGBColor RGByellow_Field;
+		private static RGBColor RGBpurple_Field;
+		private static RGBColor RGBcyan_Field;
 		
-		private float red_Renamed_Field, green_Renamed_Field, blue_Renamed_Field;
+		private float red_Field, green_Field, blue_Field;
 		
 		public RGBColor()
 		{
-			set_Renamed(0);
+			set(0);
 		}
 		
 		public RGBColor(float intensity)
 		{
-			set_Renamed(intensity);
+			set(intensity);
 		}
 		
 		public RGBColor(float red, float green, float blue)
 		{
-			set_Renamed(red, green, blue);
+			set(red, green, blue);
 		}
 		
 		public RGBColor(RGBColor source)
 		{
-			set_Renamed(source);
+			set(source);
 		}
 		
 		public RGBColor(Vector3D source)
 		{
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
-			set_Renamed((float) source.x(), (float) source.y(), (float) source.z());
+			set((float) source.x(), (float) source.y(), (float) source.z());
 		}
 		
 		public virtual float red()
 		{
-			return red_Renamed_Field;
+			return red_Field;
 		}
 		
 		public virtual float green()
 		{
-			return green_Renamed_Field;
+			return green_Field;
 		}
 		
 		public virtual float blue()
 		{
-			return blue_Renamed_Field;
+			return blue_Field;
 		}
 		
-		public virtual void  set_Renamed(float value_Renamed)
+		public virtual void  set(float value)
 		{
-			set_Renamed(value_Renamed, value_Renamed, value_Renamed);
+			set(value, value, value);
 		}
 		
 		public virtual RGBColor convertTo24Bits()
@@ -122,37 +113,37 @@ namespace photontracer.misc
 		
 		public virtual void  clamp()
 		{
-			if (red_Renamed_Field > 1)
-				red_Renamed_Field = 1;
-			if (red_Renamed_Field < 0)
-				red_Renamed_Field = 0;
+			if (red_Field > 1)
+				red_Field = 1;
+			if (red_Field < 0)
+				red_Field = 0;
 
-			if (green_Renamed_Field > 1)
-				green_Renamed_Field = 1;
-			if (green_Renamed_Field < 0)
-				green_Renamed_Field = 0;
+			if (green_Field > 1)
+				green_Field = 1;
+			if (green_Field < 0)
+				green_Field = 0;
 			
-			if (blue_Renamed_Field > 1)
-				blue_Renamed_Field = 1;
-			if (blue_Renamed_Field < 0)
-				blue_Renamed_Field = 0;
+			if (blue_Field > 1)
+				blue_Field = 1;
+			if (blue_Field < 0)
+				blue_Field = 0;
 		}
 		
-		public virtual void  set_Renamed(float red, float green, float blue)
+		public virtual void  set(float red, float green, float blue)
 		{
 			Red = red;
 			Green = green;
 			Blue = blue;
 		}
 		
-		public virtual void  set_Renamed(RGBColor other)
+		public virtual void  set(RGBColor other)
 		{
-			set_Renamed(other.red(), other.green(), other.blue());
+			set(other.red(), other.green(), other.blue());
 		}
 		
 		public virtual void  add(RGBColor other)
 		{
-			set_Renamed(red() + other.red(), green() + other.green(), blue() + other.blue());
+			set(red() + other.red(), green() + other.green(), blue() + other.blue());
 		}
 		
 		public virtual RGBColor addNew(RGBColor other)
@@ -164,7 +155,7 @@ namespace photontracer.misc
 		
 		public virtual void  sub(RGBColor other)
 		{
-			set_Renamed(red() - other.red(), green() - other.green(), blue() - other.blue());
+			set(red() - other.red(), green() - other.green(), blue() - other.blue());
 		}
 		
 		public virtual RGBColor subNew(RGBColor other)
@@ -176,7 +167,7 @@ namespace photontracer.misc
 		
 		public virtual void  scale(float factor)
 		{
-			set_Renamed(red() * factor, green() * factor, blue() * factor);
+			set(red() * factor, green() * factor, blue() * factor);
 		}
 		
 		public virtual RGBColor scaleNew(float factor)
@@ -188,7 +179,7 @@ namespace photontracer.misc
 		
 		public virtual void  scale(float factorR, float factorG, float factorB)
 		{
-			set_Renamed(red() * factorR, green() * factorG, blue() * factorB);
+			set(red() * factorR, green() * factorG, blue() * factorB);
 		}
 		
 		public virtual RGBColor scaleNew(float factorR, float factorG, float factorB)
@@ -200,7 +191,7 @@ namespace photontracer.misc
 		
 		public virtual void  scale(RGBColor other)
 		{
-			set_Renamed(red() * other.red(), green() * other.green(), blue() * other.blue());
+			set(red() * other.red(), green() * other.green(), blue() * other.blue());
 		}
 		
 		public virtual RGBColor scaleNew(RGBColor other)
@@ -220,41 +211,41 @@ namespace photontracer.misc
 			//if (g1 < 0.0f) g1 = 0.0f;
 			//if (b1 < 0.0f) b1 = 0.0f;
 
-			set_Renamed(r1, g1, b1);  
-			//set_Renamed(red() + factor * other.red(), green() + factor * other.green(), blue() + factor * other.blue());   
+			set(r1, g1, b1);  
+			//set(red() + factor * other.red(), green() + factor * other.green(), blue() + factor * other.blue());   
 		}
 
 		public static RGBColor RGBblack()
 		{
-			return RGBblack_Renamed_Field;
+			return RGBblack_Field;
 		}
 		public static RGBColor RGBwhite()
 		{
-			return RGBwhite_Renamed_Field;
+			return RGBwhite_Field;
 		}
 		public static RGBColor RGBred()
 		{
-			return RGBred_Renamed_Field;
+			return RGBred_Field;
 		}
 		public static RGBColor RGBgreen()
 		{
-			return RGBgreen_Renamed_Field;
+			return RGBgreen_Field;
 		}
 		public static RGBColor RGBblue()
 		{
-			return RGBblue_Renamed_Field;
+			return RGBblue_Field;
 		}
 		public static RGBColor RGByellow()
 		{
-			return RGByellow_Renamed_Field;
+			return RGByellow_Field;
 		}
 		public static RGBColor RGBpurple()
 		{
-			return RGBpurple_Renamed_Field;
+			return RGBpurple_Field;
 		}
 		public static RGBColor RGBcyan()
 		{
-			return RGBcyan_Renamed_Field;
+			return RGBcyan_Field;
 		}
 		
 		public override System.String ToString()
@@ -263,14 +254,14 @@ namespace photontracer.misc
 		}
 		static RGBColor()
 		{
-			RGBblack_Renamed_Field = new RGBColor(0, 0, 0);
-			RGBwhite_Renamed_Field = new RGBColor(1, 1, 1);
-			RGBred_Renamed_Field = new RGBColor(1, 0, 0);
-			RGBgreen_Renamed_Field = new RGBColor(0, 1, 0);
-			RGBblue_Renamed_Field = new RGBColor(0, 0, 1);
-			RGByellow_Renamed_Field = new RGBColor(1, 1, 0);
-			RGBpurple_Renamed_Field = new RGBColor(1, 0, 1);
-			RGBcyan_Renamed_Field = new RGBColor(0, 1, 1);
+			RGBblack_Field = new RGBColor(0, 0, 0);
+			RGBwhite_Field = new RGBColor(1, 1, 1);
+			RGBred_Field = new RGBColor(1, 0, 0);
+			RGBgreen_Field = new RGBColor(0, 1, 0);
+			RGBblue_Field = new RGBColor(0, 0, 1);
+			RGByellow_Field = new RGBColor(1, 1, 0);
+			RGBpurple_Field = new RGBColor(1, 0, 1);
+			RGBcyan_Field = new RGBColor(0, 1, 1);
 		}
 	}
 }

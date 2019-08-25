@@ -19,17 +19,13 @@ namespace photontracer.photonmap
 		// direction->spherical
 		public virtual void  toSpherical(Vector3D direction)
 		{
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			theta = (float) System.Math.Acos(direction.z());
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			phi = (float) System.Math.Atan2(direction.y(), direction.x());
 		}
 		
 		public virtual void  surfaceToSpherical(Vector3D direction)
 		{
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			surfaceTheta = (float) System.Math.Acos(direction.z());
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			surfacePhi = (float) System.Math.Atan2(direction.y(), direction.x());
 		}
 		

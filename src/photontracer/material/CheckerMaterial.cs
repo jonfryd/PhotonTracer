@@ -12,7 +12,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.spacing_Renamed_Field = value;
+				this.spacing_Field = value;
 			}
 			
 		}
@@ -20,12 +20,12 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.otherDiffuseColor_Renamed_Field = value;
+				this.otherDiffuseColor_Field = value;
 			}
 			
 		}
-		private RGBColor otherDiffuseColor_Renamed_Field;
-		private float spacing_Renamed_Field;
+		private RGBColor otherDiffuseColor_Field;
+		private float spacing_Field;
 		
 		public CheckerMaterial():base()
 		{
@@ -50,22 +50,21 @@ namespace photontracer.material
 		
 		public override RGBColor diffuseColor(Vector3D localPoint)
 		{
-			int value_Renamed;
+			int value;
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
-			value_Renamed = (int) System.Math.Round(localPoint.x() / spacing_Renamed_Field) + (int) System.Math.Round(localPoint.y() / spacing_Renamed_Field) + (int) System.Math.Round(localPoint.z() / spacing_Renamed_Field);
+			value = (int) System.Math.Round(localPoint.x() / spacing_Field) + (int) System.Math.Round(localPoint.y() / spacing_Field) + (int) System.Math.Round(localPoint.z() / spacing_Field);
 			
-			return ((value_Renamed & 1) == 0)?diffuseColor():otherDiffuseColor();
+			return ((value & 1) == 0)?diffuseColor():otherDiffuseColor();
 		}
 		
 		public virtual float spacing()
 		{
-			return spacing_Renamed_Field;
+			return spacing_Field;
 		}
 		
 		public virtual RGBColor otherDiffuseColor()
 		{
-			return otherDiffuseColor_Renamed_Field;
+			return otherDiffuseColor_Field;
 		}
 	}
 }

@@ -3,6 +3,7 @@ using System;
 using Vector3D = photontracer.math.Vector3D;
 using RGBColor = photontracer.misc.RGBColor;
 using Primitive = photontracer.objects.Primitive;
+
 namespace photontracer.material
 {
 	
@@ -12,7 +13,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.otherDiffuseColor_Renamed_Field = value;
+				this.otherDiffuseColor_Field = value;
 			}
 			
 		}
@@ -20,7 +21,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.tiling_Renamed_Field = value;
+				this.tiling_Field = value;
 			}
 			
 		}
@@ -28,8 +29,8 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.offset_Renamed_Field = new Vector3D(value);
-				this.offset_Renamed_Field.add(0.5);
+				this.offset_Field = new Vector3D(value);
+				this.offset_Field.add(0.5);
 			}
 			
 		}
@@ -37,7 +38,7 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.mirror_Renamed_Field = value;
+				this.mirror_Field = value;
 			}
 			
 		}
@@ -45,61 +46,19 @@ namespace photontracer.material
 		{
 			set
 			{
-				this.tile_Renamed_Field = value;
+				this.tile_Field = value;
 			}
 			
 		}
-		private RGBColor otherDiffuseColor_Renamed_Field;
-		//UPGRADE_TODO: Class 'java.awt.image.BufferedImage' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
+		private RGBColor otherDiffuseColor_Field;
 //		private BufferedImage texture;
 		private System.Drawing.Bitmap texture;
 		private int textureWidth, textureHeight;
 		private float fTextureWidth, fTextureHeight;
-		private Vector3D tiling_Renamed_Field;
-		private Vector3D offset_Renamed_Field;
-		private bool mirror_Renamed_Field;
-		private bool tile_Renamed_Field;
-		
-		//UPGRADE_NOTE: Field 'EnclosingInstance' was added to class 'Bool' to access its enclosing instance. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1019"'
-		internal class Bool
-		{
-			private void  InitBlock(TextureMaterial enclosingInstance)
-			{
-				this.enclosingInstance = enclosingInstance;
-			}
-			private TextureMaterial enclosingInstance;
-			public TextureMaterial Enclosing_Instance
-			{
-				get
-				{
-					return enclosingInstance;
-				}
-				
-			}
-			internal bool value_Renamed;
-			
-			internal Bool(TextureMaterial enclosingInstance)
-			{
-				InitBlock(enclosingInstance);
-				setBool(true);
-			}
-			
-			internal Bool(TextureMaterial enclosingInstance, bool value_Renamed)
-			{
-				InitBlock(enclosingInstance);
-				setBool(value_Renamed);
-			}
-			
-			internal virtual bool bool_Renamed()
-			{
-				return value_Renamed;
-			}
-			
-			internal virtual void  setBool(bool value_Renamed)
-			{
-				this.value_Renamed = value_Renamed;
-			}
-		}
+		private Vector3D tiling_Field;
+		private Vector3D offset_Field;
+		private bool mirror_Field;
+		private bool tile_Field;
 		
 		public TextureMaterial():base()
 		{
@@ -141,9 +100,7 @@ namespace photontracer.material
 				texture = new System.Drawing.Bitmap (filename.ToString ());
 				//texture = new System.Drawing.Bitmap (100,100);
 				
-				//UPGRADE_TODO: Method 'java.awt.image.BufferedImage.getWidth' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 				textureWidth = texture.Width;
-				//UPGRADE_TODO: Method 'java.awt.image.BufferedImage.getHeight' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
 				textureHeight = texture.Height;
 				
 				fTextureWidth = textureWidth;
@@ -151,7 +108,6 @@ namespace photontracer.material
 			}
 			catch (System.Exception e)
 			{
-				//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 				System.Console.Out.WriteLine(e);
 				System.Environment.Exit(- 1);
 			}
@@ -168,11 +124,7 @@ namespace photontracer.material
 				return diffuseColor();
 			}
 			
-			//UPGRADE_TODO: Method 'java.awt.image.BufferedImage.getRGB' was not converted. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1095"'
-			lock (this)
-			{
-				RGB = texture.GetPixel (u, v).ToArgb ();
-			}
+            RGB = texture.GetPixel (u, v).ToArgb ();
 			
 			texel = new RGBColor((RGB >> 16) & 0xff, (RGB >> 8) & 0xff, RGB & 0xff);
 			
@@ -184,33 +136,30 @@ namespace photontracer.material
 			return (a < 0)?((a / b) - 1):(a / b);
 		}
 		
-		private int correctTexel(int value_Renamed, Bool wrappedObj, int max)
+		private int correctTexel(int value, ref bool wrapped, int max)
 		{
-			bool wrapped;
-			int i = value_Renamed % max;
+			int i = value % max;
 			
 			wrapped = false;
 			
-			if (value_Renamed < 0)
+			if (value < 0)
 			{
 				i += (max - 1);
 				
 				wrapped = true;
 			}
-			else if (value_Renamed >= max)
+			else if (value >= max)
 			{
 				wrapped = true;
 			}
 			
 			if (mirror())
 			{
-				if ((ifloor(value_Renamed, max) & 1) == 0)
+				if ((ifloor(value, max) & 1) == 0)
 				{
 					i = (max - 1) - i;
 				}
 			}
-			
-			wrappedObj.setBool(wrapped);
 			
 			return i;
 		}
@@ -221,35 +170,26 @@ namespace photontracer.material
 			float u, v;
 			int iu, iv, iu2, iv2;
 			float uv, iuv, uiv, iuiv;
-			float iiu, iiv;
+			//float iiu, iiv;
 			float fu, fv;
-			bool uWrapped;
-			bool u2Wrapped;
-			bool vWrapped;
-			bool v2Wrapped;
-			Bool boolObj = new Bool(this);
-			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
+			bool uWrapped = false;
+			bool u2Wrapped = false;
+			bool vWrapped = false;
+			bool v2Wrapped = false;
+
 			u = (float) uvcoord.x() * fTextureWidth;
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			v = (float) uvcoord.y() * fTextureHeight;
 			
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			iu = (int) u;
-			//UPGRADE_WARNING: Narrowing conversions may produce unexpected results in C#. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1042"'
 			iv = (int) v;
 			
 			fu = u - iu;
 			fv = v - iv;
 			
-			iu2 = correctTexel(iu + 1, boolObj, textureWidth);
-			u2Wrapped = boolObj.bool_Renamed();
-			iv2 = correctTexel(iv + 1, boolObj, textureHeight);
-			v2Wrapped = boolObj.bool_Renamed();
-			iu = correctTexel(iu, boolObj, textureWidth);
-			uWrapped = boolObj.bool_Renamed();
-			iv = correctTexel(iv, boolObj, textureHeight);
-			vWrapped = boolObj.bool_Renamed();
+			iu2 = correctTexel(iu + 1, ref u2Wrapped, textureWidth);
+			iv2 = correctTexel(iv + 1, ref v2Wrapped, textureHeight);
+			iu = correctTexel(iu, ref uWrapped, textureWidth);
+			iv = correctTexel(iv, ref vWrapped, textureHeight);
 			
 			if (fu < 0.0f)
 			{
@@ -277,35 +217,35 @@ namespace photontracer.material
 		{
 			Vector3D finalLocalPoint;
 			
-			finalLocalPoint = localPoint.scaleNew(tiling_Renamed_Field);
-			finalLocalPoint.add(offset_Renamed_Field);
+			finalLocalPoint = localPoint.scaleNew(tiling_Field);
+			finalLocalPoint.add(offset_Field);
 			
 			return lerpTexel(finalLocalPoint);
 		}
 		
 		public virtual RGBColor otherDiffuseColor()
 		{
-			return otherDiffuseColor_Renamed_Field;
+			return otherDiffuseColor_Field;
 		}
 		
 		public virtual Vector3D tiling()
 		{
-			return tiling_Renamed_Field;
+			return tiling_Field;
 		}
 		
 		public virtual Vector3D offset()
 		{
-			return offset_Renamed_Field;
+			return offset_Field;
 		}
 		
 		public virtual bool mirror()
 		{
-			return mirror_Renamed_Field;
+			return mirror_Field;
 		}
 		
 		public virtual bool tile()
 		{
-			return tile_Renamed_Field;
+			return tile_Field;
 		}
 	}
 }

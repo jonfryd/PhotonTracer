@@ -30,7 +30,7 @@ namespace photontracer.math
 			double y = (a.x() * u.y()) + (a.y() * v.y()) + (a.z() * w.y());
 			double z = (a.x() * u.z()) + (a.y() * v.z()) + (a.z() * w.z());
 
-			a.set_Renamed (x, y, z);
+			a.set (x, y, z);
 
 			return new Vector3D (a);
 		}
@@ -46,7 +46,7 @@ namespace photontracer.math
 		public static OrthoNormalBasis makeFromW(Vector3D w) 
 		{
 			OrthoNormalBasis onb = new OrthoNormalBasis();
-			onb.w.set_Renamed (w);
+			onb.w.set (w);
 			onb.w.normalize ();
 			//w.normalize(onb.w);
 
@@ -79,7 +79,7 @@ namespace photontracer.math
 		public static OrthoNormalBasis makeFromWV(Vector3D w, Vector3D v) 
 		{
 			OrthoNormalBasis onb = new OrthoNormalBasis();
-			onb.w.set_Renamed (w);
+			onb.w.set (w);
 			onb.w.normalize ();
 			//w.normalize(onb.w);
 

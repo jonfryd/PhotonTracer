@@ -10,7 +10,7 @@ namespace photontracer.math
 		{
 			set
 			{
-				this.x_Renamed_Field = value;
+				this.x_Field = value;
 			}
 			
 		}
@@ -18,7 +18,7 @@ namespace photontracer.math
 		{
 			set
 			{
-				this.y_Renamed_Field = value;
+				this.y_Field = value;
 			}
 			
 		}
@@ -26,59 +26,59 @@ namespace photontracer.math
 		{
 			set
 			{
-				this.z_Renamed_Field = value;
+				this.z_Field = value;
 			}
 			
 		}
-		private double x_Renamed_Field, y_Renamed_Field, z_Renamed_Field;
+		private double x_Field, y_Field, z_Field;
 		
 		public Vector3D()
 		{
-			x_Renamed_Field = y_Renamed_Field = z_Renamed_Field = 0;
+			x_Field = y_Field = z_Field = 0;
 		}
 		
 		public Vector3D(double a)
 		{
-			set_Renamed(a);
+			set(a);
 		}
 		
 		public Vector3D(double x, double y, double z)
 		{
-			set_Renamed(x, y, z);
+			set(x, y, z);
 		}
 		
 		
 		public Vector3D(double theta, double phi)
 		{
-			set_Renamed(System.Math.Sin(theta) * System.Math.Cos(phi), System.Math.Sin(theta) * System.Math.Sin(phi), System.Math.Cos(theta));
+			set(System.Math.Sin(theta) * System.Math.Cos(phi), System.Math.Sin(theta) * System.Math.Sin(phi), System.Math.Cos(theta));
 		}
 		
 		public Vector3D(Vector3D source)
 		{
-			set_Renamed(source);
+			set(source);
 		}
 		
 		public Vector3D(RGBColor source)
 		{
-			set_Renamed(source.red(), source.green(), source.blue());
+			set(source.red(), source.green(), source.blue());
 		}
 		
 		public virtual double x()
 		{
-			return x_Renamed_Field;
+			return x_Field;
 		}
 		
 		public virtual double y()
 		{
-			return y_Renamed_Field;
+			return y_Field;
 		}
 		
 		public virtual double z()
 		{
-			return z_Renamed_Field;
+			return z_Field;
 		}
 		
-		public virtual double get_Renamed(int i)
+		public virtual double get(int i)
 		{
 			switch (i)
 			{
@@ -99,21 +99,21 @@ namespace photontracer.math
 			}
 		}
 		
-		public virtual void  set_Renamed(int i, double value_Renamed)
+		public virtual void  set(int i, double value)
 		{
 			switch (i)
 			{
 				
 				case 0: 
-					X = value_Renamed;
+					X = value;
 					break;
 				
 				case 1: 
-					Y = value_Renamed;
+					Y = value;
 					break;
 				
 				case 2: 
-					Z = value_Renamed;
+					Z = value;
 					break;
 				
 				
@@ -143,7 +143,6 @@ namespace photontracer.math
 			}
 			catch (System.ArithmeticException e)
 			{
-				//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 				System.Console.Out.WriteLine(e);
 			}
 		}
@@ -174,26 +173,26 @@ namespace photontracer.math
 			return diffVector.norm();
 		}
 		
-		public virtual void  set_Renamed(double value_Renamed)
+		public virtual void  set(double value)
 		{
-			set_Renamed(value_Renamed, value_Renamed, value_Renamed);
+			set(value, value, value);
 		}
 		
-		public virtual void  set_Renamed(double x, double y, double z)
+		public virtual void  set(double x, double y, double z)
 		{
 			X = x;
 			Y = y;
 			Z = z;
 		}
 		
-		public virtual void  set_Renamed(Vector3D other)
+		public virtual void  set(Vector3D other)
 		{
-			set_Renamed(other.x(), other.y(), other.z());
+			set(other.x(), other.y(), other.z());
 		}
 		
 		public virtual void  neg()
 		{
-			set_Renamed(- x(), - y(), - z());
+			set(- x(), - y(), - z());
 		}
 		
 		public virtual Vector3D negNew()
@@ -203,21 +202,21 @@ namespace photontracer.math
 			return result;
 		}
 		
-		public virtual void  add(double value_Renamed)
+		public virtual void  add(double value)
 		{
-			set_Renamed(x() + value_Renamed, y() + value_Renamed, z() + value_Renamed);
+			set(x() + value, y() + value, z() + value);
 		}
 		
-		public virtual Vector3D addNew(double value_Renamed)
+		public virtual Vector3D addNew(double value)
 		{
-			Vector3D result = new Vector3D(x() + value_Renamed, y() + value_Renamed, z() + value_Renamed);
+			Vector3D result = new Vector3D(x() + value, y() + value, z() + value);
 			
 			return result;
 		}
 		
 		public virtual void  add(Vector3D other)
 		{
-			set_Renamed(x() + other.x(), y() + other.y(), z() + other.z());
+			set(x() + other.x(), y() + other.y(), z() + other.z());
 		}
 		
 		public virtual Vector3D addNew(Vector3D other)
@@ -229,7 +228,7 @@ namespace photontracer.math
 		
 		public virtual void  sub(Vector3D other)
 		{
-			set_Renamed(x() - other.x(), y() - other.y(), z() - other.z());
+			set(x() - other.x(), y() - other.y(), z() - other.z());
 		}
 		
 		public virtual Vector3D subNew(Vector3D other)
@@ -241,7 +240,7 @@ namespace photontracer.math
 		
 		public virtual void  scale(double factor)
 		{
-			set_Renamed(x() * factor, y() * factor, z() * factor);
+			set(x() * factor, y() * factor, z() * factor);
 		}
 		
 		public virtual Vector3D scaleNew(double factor)
@@ -253,7 +252,7 @@ namespace photontracer.math
 		
 		public virtual void  scale(double factorX, double factorY, double factorZ)
 		{
-			set_Renamed(x() * factorX, y() * factorY, z() * factorZ);
+			set(x() * factorX, y() * factorY, z() * factorZ);
 		}
 		
 		public virtual Vector3D scaleNew(double factorX, double factorY, double factorZ)
@@ -265,7 +264,7 @@ namespace photontracer.math
 		
 		public virtual void  scale(Vector3D other)
 		{
-			set_Renamed(x() * other.x(), y() * other.y(), z() * other.z());
+			set(x() * other.x(), y() * other.y(), z() * other.z());
 		}
 		
 		public virtual Vector3D scaleNew(Vector3D other)
@@ -277,31 +276,31 @@ namespace photontracer.math
 		
 		public virtual void  updateMinMax(Vector3D min, Vector3D max)
 		{
-			if (x_Renamed_Field < min.x())
+			if (x_Field < min.x())
 			{
-				min.X = x_Renamed_Field;
+				min.X = x_Field;
 			}
-			if (x_Renamed_Field > max.x())
+			if (x_Field > max.x())
 			{
-				max.X = x_Renamed_Field;
-			}
-			
-			if (y_Renamed_Field < min.y())
-			{
-				min.Y = y_Renamed_Field;
-			}
-			if (y_Renamed_Field > max.y())
-			{
-				max.Y = y_Renamed_Field;
+				max.X = x_Field;
 			}
 			
-			if (z_Renamed_Field < min.z())
+			if (y_Field < min.y())
 			{
-				min.Z = z_Renamed_Field;
+				min.Y = y_Field;
 			}
-			if (z_Renamed_Field > max.z())
+			if (y_Field > max.y())
 			{
-				max.Z = z_Renamed_Field;
+				max.Y = y_Field;
+			}
+			
+			if (z_Field < min.z())
+			{
+				min.Z = z_Field;
+			}
+			if (z_Field > max.z())
+			{
+				max.Z = z_Field;
 			}
 		}
 		

@@ -5,12 +5,13 @@ using Vector3D = photontracer.math.Vector3D;
 using Material = photontracer.material.Material;
 using Ray = photontracer.misc.Ray;
 using Intersection = photontracer.misc.Intersection;
+
 namespace photontracer.objects
 {
 	
 	public class Sphere:Primitive
 	{
-		private void  InitBlock()
+		private void init()
 		{
 			invPI = 1.0 / System.Math.PI;
 		}
@@ -18,46 +19,44 @@ namespace photontracer.objects
 		{
 			set
 			{
-				this.radius_Renamed_Field = value;
-				getBoundingBox().getExtents ().set_Renamed (value);
+				this.radius_Field = value;
+				getBoundingBox().getExtents ().set (value);
 				
 				try
 				{
-					invRadius_Renamed_Field = 1.0 / value;
+					invRadius_Field = 1.0 / value;
 				}
 				catch (System.ArithmeticException e)
 				{
-					//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 					System.Console.Out.WriteLine(e);
 				}
 			}
 			
 		}
-		//UPGRADE_NOTE: The initialization of  'invPI' was moved to method 'InitBlock'. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1005"'
-		private double radius_Renamed_Field, invRadius_Renamed_Field, invPI;
+		private double radius_Field, invRadius_Field, invPI;
 		
 		public Sphere():base()
 		{
-			InitBlock();
+			init();
 			
 			Radius = 1;
 		}
 		
 		public Sphere(Vector3D position, double radius):base(position)
 		{
-			InitBlock();
+			init();
 			
 			Radius = radius;
 		}
 		
 		public virtual double invRadius()
 		{
-			return invRadius_Renamed_Field;
+			return invRadius_Field;
 		}
 		
 		public virtual double radius()
 		{
-			return radius_Renamed_Field;
+			return radius_Field;
 		}
 		
 		public override bool intersect(Ray ray, Intersection intersection)
@@ -118,7 +117,6 @@ namespace photontracer.objects
 			}
 			catch (System.ArithmeticException e)
 			{
-				//UPGRADE_TODO: Method 'java.io.PrintStream.println' was converted to 'System.Console.WriteLine' which has a different behavior. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1073"'
 				System.Console.Out.WriteLine(e);
 				
 				return false;
@@ -152,7 +150,6 @@ namespace photontracer.objects
 		
 		public override System.String ToString()
 		{
-			//UPGRADE_TODO: The equivalent in .NET for method 'java.lang.Object.toString' may return a different value. 'ms-help://MS.VSCC.2003/commoner/redir/redirect.htm?keyword="jlca1043"'
 			return new System.Text.StringBuilder("[Sphere] -\n  Position: " + position() + "\n  Radius  : " + radius()).ToString();
 		}
 	}

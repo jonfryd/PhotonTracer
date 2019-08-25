@@ -10,11 +10,11 @@ namespace photontracer.misc
 		{
 			set
 			{
-				this.focalLength_Renamed_Field = value;
+				this.focalLength_Field = value;
 			}
 			
 		}
-		private double focalLength_Renamed_Field;
+		private double focalLength_Field;
 		
 		public Camera()
 		{
@@ -28,12 +28,12 @@ namespace photontracer.misc
 		
 		public virtual double focalLength()
 		{
-			return focalLength_Renamed_Field;
+			return focalLength_Field;
 		}
 		
 		public virtual Ray getRay(double u, double v)
 		{
-			Vector3D direction = new Vector3D(u, v, focalLength_Renamed_Field);
+			Vector3D direction = new Vector3D(u, v, focalLength_Field);
 			direction.normalize();
 			
 			return new Ray(new Vector3D(u, v, 0), direction);
@@ -41,7 +41,7 @@ namespace photontracer.misc
 		
 		public override System.String ToString()
 		{
-			return new System.Text.StringBuilder("[Camera] -\n  Focal length: " + focalLength_Renamed_Field).ToString();
+			return new System.Text.StringBuilder("[Camera] -\n  Focal length: " + focalLength_Field).ToString();
 		}
 	}
 }
