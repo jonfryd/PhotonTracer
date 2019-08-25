@@ -25,8 +25,8 @@ namespace photontracer.photonmap
 			
 			photons = new System.Collections.ArrayList(10);
 			
-			bboxMin = new Vector3D(photontracer.SceneConstants.HUGEVALUE);
-			bboxMax = new Vector3D(- photontracer.SceneConstants.HUGEVALUE);
+			bboxMin = new Vector3D(photontracer.SceneConstants.HUGE_VALUE);
+			bboxMax = new Vector3D(- photontracer.SceneConstants.HUGE_VALUE);
 			
 			photons.Add(new Photon());
 		}
@@ -420,7 +420,7 @@ namespace photontracer.photonmap
 			locatePhotons(np, 1);
 			
 			// if less than MINPHOTONS return
-			if (np.found < photontracer.SceneConstants.MINPHOTONS)
+			if (np.found < photontracer.SceneConstants.MIN_PHOTONS)
 			{
 				return ;
 			}
@@ -465,7 +465,7 @@ namespace photontracer.photonmap
 			locatePhotons(np, 1);
 			
 			// if less than MINPHOTONS return
-			if (np.found < photontracer.SceneConstants.MINPHOTONS)
+			if (np.found < photontracer.SceneConstants.MIN_PHOTONS)
 			{
 				return ;
 			}

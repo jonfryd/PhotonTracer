@@ -337,13 +337,13 @@ class Photontracer
 		
 		//causticsmap.precomputeRadiance(photontracer.SceneConstants.MAXPHOTDIST, photontracer.SceneConstants.MAXPHOTONS);
 		before = System.DateTime.Now;
-		photonmap.precomputeRadiance(photontracer.SceneConstants.MAXPHOTDIST, photontracer.SceneConstants.MAXPHOTONS);
+		photonmap.precomputeRadiance(photontracer.SceneConstants.MAX_PHOTON_DIST, photontracer.SceneConstants.MAX_PHOTONS);
 		after = System.DateTime.Now;
 
 		System.TimeSpan timeDiff = after - before;
 
 		// init irradiance cache
-		irradianceCache = new IrradianceCache (photontracer.SceneConstants.IRRADIANCECACHETOLERANCE, photontracer.SceneConstants.IRRADIANCECACHESPACING, scene.getBoundingBox ());
+		irradianceCache = new IrradianceCache (photontracer.SceneConstants.IRRADIANCE_CACHE_TOLERANCE, photontracer.SceneConstants.IRRADIANCE_CACHE_SPACING, scene.getBoundingBox ());
 
 		before = System.DateTime.Now;
 		traceImage(false);
@@ -638,7 +638,7 @@ class Photontracer
 		
 		// Upper-left
 		
-		if (((System.Math.Abs(radiance.red() - colors[0].red()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.green() - colors[0].green()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.blue() - colors[0].blue()) > photontracer.SceneConstants.MAXCOLORDIFF)) && (depth < photontracer.SceneConstants.MAXAADEPTH))
+		if (((System.Math.Abs(radiance.red() - colors[0].red()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.green() - colors[0].green()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.blue() - colors[0].blue()) > photontracer.SceneConstants.MAX_COLOR_DIFF)) && (depth < photontracer.SceneConstants.MAX_AA_DEPTH))
 		{
 			newColors[0] = colors[0];
 			newColors[1] = shadeRay(u, v + stepV);
@@ -657,7 +657,7 @@ class Photontracer
 		
 		// Upper-right
 		
-		if (((System.Math.Abs(radiance.red() - colors[1].red()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.green() - colors[1].green()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.blue() - colors[1].blue()) > photontracer.SceneConstants.MAXCOLORDIFF)) && (depth < photontracer.SceneConstants.MAXAADEPTH))
+		if (((System.Math.Abs(radiance.red() - colors[1].red()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.green() - colors[1].green()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.blue() - colors[1].blue()) > photontracer.SceneConstants.MAX_COLOR_DIFF)) && (depth < photontracer.SceneConstants.MAX_AA_DEPTH))
 		{
 			newColors[0] = shadeRay(u, v + stepV);
 			newColors[1] = colors[1];
@@ -676,7 +676,7 @@ class Photontracer
 		
 		// Lower-left
 		
-		if (((System.Math.Abs(radiance.red() - colors[2].red()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.green() - colors[2].green()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.blue() - colors[2].blue()) > photontracer.SceneConstants.MAXCOLORDIFF)) && (depth < photontracer.SceneConstants.MAXAADEPTH))
+		if (((System.Math.Abs(radiance.red() - colors[2].red()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.green() - colors[2].green()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.blue() - colors[2].blue()) > photontracer.SceneConstants.MAX_COLOR_DIFF)) && (depth < photontracer.SceneConstants.MAX_AA_DEPTH))
 		{
 			newColors[0] = shadeRay(u - stepU, v);
 			newColors[1] = radiance;
@@ -695,7 +695,7 @@ class Photontracer
 		
 		// Lower-right
 		
-		if (((System.Math.Abs(radiance.red() - colors[3].red()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.green() - colors[3].green()) > photontracer.SceneConstants.MAXCOLORDIFF) || (System.Math.Abs(radiance.blue() - colors[3].blue()) > photontracer.SceneConstants.MAXCOLORDIFF)) && (depth < photontracer.SceneConstants.MAXAADEPTH))
+		if (((System.Math.Abs(radiance.red() - colors[3].red()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.green() - colors[3].green()) > photontracer.SceneConstants.MAX_COLOR_DIFF) || (System.Math.Abs(radiance.blue() - colors[3].blue()) > photontracer.SceneConstants.MAX_COLOR_DIFF)) && (depth < photontracer.SceneConstants.MAX_AA_DEPTH))
 		{
 			newColors[0] = radiance;
 			newColors[1] = shadeRay(u + stepU, v);
@@ -724,14 +724,14 @@ class Photontracer
 		
 		primaryRay = camera.getRay(u, v);
 		
-		return traceRay(primaryRay, photontracer.SceneConstants.MAXDEPTH, false);
+		return traceRay(primaryRay, photontracer.SceneConstants.MAX_DEPTH, false);
 	}
 
 	RGBColor getIrradiance(Vector3D P, Vector3D N, int depth) 
 	{
 		RGBColor irr;
 
-		int irrM = (int) Math.Max(1, Math.Sqrt(photontracer.SceneConstants.IRRADIANCESAMPLES / Math.PI));
+		int irrM = (int) Math.Max(1, Math.Sqrt(photontracer.SceneConstants.IRRADIANCE_SAMPLES / Math.PI));
 		int irrN = (int) Math.Max(1, (irrM * Math.PI));
 
 		//if (irradianceCache == null || state.getDiffuseDepth() > 0)
@@ -1144,7 +1144,7 @@ class Photontracer
 
 		if (causticsmap.storedPhotons () > 0)
 		{
-			causticsmap.radianceEstimate(radiance, P, N, photontracer.SceneConstants.MAXPHOTDIST, photontracer.SceneConstants.MAXPHOTONS);
+			causticsmap.radianceEstimate(radiance, P, N, photontracer.SceneConstants.MAX_PHOTON_DIST, photontracer.SceneConstants.MAX_PHOTONS);
 			//causticsmap.radianceEstimatePrecomputed(radiance, P, N, photontracer.SceneConstants.INITIALPHOTDIST, photontracer.SceneConstants.MAXPHOTDISTPREC);
 		}
 
@@ -1158,7 +1158,7 @@ class Photontracer
 		if (photonmap.storedPhotons () > 0)
 		{
 			//photonmap.radianceEstimate(radiance, P, N, photontracer.SceneConstants.MAXPHOTDIST, photontracer.SceneConstants.MAXPHOTONS);
-			photonmap.radianceEstimatePrecomputed(radiance, P, N, photontracer.SceneConstants.INITIALPHOTDIST, photontracer.SceneConstants.MAXPHOTDISTPREC);
+			photonmap.radianceEstimatePrecomputed(radiance, P, N, photontracer.SceneConstants.INITIAL_PHOTON_DIST, photontracer.SceneConstants.MAX_PHOTON_DIST_PREC);
 		}
 
 		return radiance;
@@ -1280,7 +1280,7 @@ class Photontracer
 			return scene.background();
 		}
 		
-		if (depth == photontracer.SceneConstants.MAXDEPTH)
+		if (depth == photontracer.SceneConstants.MAX_DEPTH)
 		{
 			System.Threading.Interlocked.Increment (ref noPrimaryRays);
 		}
@@ -1316,7 +1316,7 @@ class Photontracer
 		{
 			//Console.Out.WriteLine (closestIntersection.lambda ());
 
-			if (((hasBeenDiffuselyReflected == false) && (depth > (SceneConstants.MAXDEPTH - 2))) || (closestIntersection.lambda () < SceneConstants.SMALLDISTANCE)) 
+			if (((hasBeenDiffuselyReflected == false) && (depth > (SceneConstants.MAX_DEPTH - 2))) || (closestIntersection.lambda () < SceneConstants.SMALL_DISTANCE)) 
 			{
 				diffSpecColor.add (accurateSolution(P, N, V, localPoint, depth, material));
 			}
@@ -1379,7 +1379,7 @@ class Photontracer
 			}
 		}
 		
-		if (depth == photontracer.SceneConstants.MAXDEPTH)
+		if (depth == photontracer.SceneConstants.MAX_DEPTH)
 		{
 			System.Threading.Interlocked.Increment (ref noPrimaryRayHits);
 		}
@@ -1487,7 +1487,7 @@ class Photontracer
 				sampleRay.Direction = ori;
 				//sampleRay.normalize();
 				
-				tracePhoton(sampleRay, power, photontracer.SceneConstants.MAXBOUNCES, false, false);
+				tracePhoton(sampleRay, power, photontracer.SceneConstants.MAX_BOUNCES, false, false);
 				
 				//if ((i % 1000) == 0)
 				if ((i % 100) == 0)
