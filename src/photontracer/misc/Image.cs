@@ -1,8 +1,8 @@
 // Image class
 using System;
+
 namespace photontracer.misc
-{
-	
+{	
 	public class Image:System.Windows.Forms.PictureBox 
 	{
 		private const int DEFWIDTH = 320;

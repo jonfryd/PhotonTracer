@@ -8,7 +8,6 @@ using Intersection = photontracer.misc.Intersection;
 
 namespace photontracer.objects
 {
-	
 	public class Ring:Primitive
 	{
 		private void init()

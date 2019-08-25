@@ -8,7 +8,6 @@ using Intersection = photontracer.misc.Intersection;
 
 namespace photontracer.objects
 {
-	
 	public class Sphere:Primitive
 	{
 		private void init()

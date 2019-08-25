@@ -1,9 +1,9 @@
 // RGB color class
 using System;
 using Vector3D = photontracer.math.Vector3D;
+
 namespace photontracer.misc
 {
-	
 	public class RGBColor
 	{
 		virtual public float Red

@@ -8,7 +8,6 @@ using BoundingBox = photontracer.BoundingBox;
 
 namespace photontracer.objects
 {
-	
 	internal interface PrimitiveInterface
 	{
 		Material Material

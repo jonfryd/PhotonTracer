@@ -8,7 +8,6 @@ using SceneConstants = photontracer.SceneConstants;
 
 namespace photontracer.objects
 {
-	
 	public class Primitive : PrimitiveInterface
 	{
 		virtual public Material Material

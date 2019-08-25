@@ -1,9 +1,9 @@
 // Ray class (transmission and reflection code should go here...)
 using System;
 using Vector3D = photontracer.math.Vector3D;
+
 namespace photontracer.misc
 {
-	
 	public class Ray
 	{
 		virtual public Vector3D Location
