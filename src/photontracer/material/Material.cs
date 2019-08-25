@@ -23,7 +23,7 @@ namespace photontracer.material
 				this.diffuseColor_ = value;
 
 				absorbationCoef_ = value.average();
-				isAbsorbing_ = (absorbationCoef_ > 0)?true:false;
+				isAbsorbing_ = absorbationCoef_ > 0;
 			}
 			
 		}
@@ -34,7 +34,7 @@ namespace photontracer.material
 				this.specularColor_ = value;
 				
 				reflectionCoef_ = value.average();
-				isReflective_ = (reflectionCoef_ > 0)?true:false;
+				isReflective_ = reflectionCoef_ > 0;
 			}
 			
 		}
@@ -45,7 +45,7 @@ namespace photontracer.material
 				this.transmissionColor_ = value;
 				
 				transmissionCoef_ = value.average ();
-				isTransparent_ = (transmissionCoef_ > 0)?true:false;
+				isTransparent_ = transmissionCoef_ > 0;
 			}
 			
 		}
@@ -202,7 +202,7 @@ namespace photontracer.material
 		
 		public virtual bool isReflective(Vector3D localPoint)
 		{
-			return (reflectionCoef(localPoint) > 0)?true:false;
+			return reflectionCoef(localPoint) > 0;
 		}
 		
 		public virtual bool isAbsorbing()
@@ -212,7 +212,7 @@ namespace photontracer.material
 		
 		public virtual bool isAbsorbing(Vector3D localPoint)
 		{
-			return (absorbationCoef(localPoint) > 0)?true:false;
+			return absorbationCoef(localPoint) > 0;
 		}
 
 		public virtual bool isTransparent()
@@ -222,7 +222,7 @@ namespace photontracer.material
 		
 		public virtual bool isTransparent(Vector3D localPoint)
 		{
-			return (transmissionCoef(localPoint) > 0) ? true : false;
+			return transmissionCoef(localPoint) > 0;
 		}
 
 		public virtual float phongExponent()

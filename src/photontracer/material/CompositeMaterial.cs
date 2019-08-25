@@ -3,9 +3,9 @@ using System;
 using Vector3D = photontracer.math.Vector3D;
 using RGBColor = photontracer.misc.RGBColor;
 using Primitive = photontracer.objects.Primitive;
+
 namespace photontracer.material
 {
-	
 	public class CompositeMaterial:Material
 	{
 		virtual public float Amount1
