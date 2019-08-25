@@ -2,9 +2,9 @@
 using System;
 using Vector3D = photontracer.math.Vector3D;
 using Primitive = photontracer.objects.Primitive;
+
 namespace photontracer.misc
 {
-	
 	public class Intersection
 	{
 		virtual public Vector3D IntersectionPoint
