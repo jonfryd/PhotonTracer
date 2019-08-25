@@ -818,7 +818,7 @@ class Photontracer
 			bool bOK = true;
 			for (int i = 0; i < irrN; i++) 
 			{
-				double xi = (i + SupportClass.Random.NextDouble()) / irrN;
+				double xi = (i + ThreadLocalRandom.NextDouble()) / irrN;
 				double phi = 2 * Math.PI * xi;
 				double cosPhi = Math.Cos(phi);
 				double sinPhi = Math.Sin(phi);
@@ -840,9 +840,9 @@ class Photontracer
 				transGradient2Temp.set (RGBColor.RGBblack());
 				for (int j = 0; j < (irrM / 1); j++) 
 				{
-					//System.Console.Out.WriteLine (SupportClass.Random.NextDouble());
+					//System.Console.Out.WriteLine (ThreadLocalRandom.NextDouble());
 
-					double xj = (j + SupportClass.Random.NextDouble()) / irrM;
+					double xj = (j + ThreadLocalRandom.NextDouble()) / irrM;
 					double sinTheta = Math.Sqrt(xj);
 					double cosTheta = Math.Sqrt(1.0 - xj);
 					double rij = Double.PositiveInfinity;
@@ -1012,7 +1012,7 @@ class Photontracer
 			scale = Math.PI / (irrM * irrN);
 //			scale = 1.0 / (irrM * irrN);
 			irr.scale((float) scale / (float) Math.PI);
-			//irr.set (new RGBColor((float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble(),(float) SupportClass.Random.NextDouble()));
+			//irr.set (new RGBColor((float) ThreadLocalRandom.NextDouble(),(float) ThreadLocalRandom.NextDouble(),(float) ThreadLocalRandom.NextDouble()));
 			rotGradient[0].scale((float) scale);
 			rotGradient[1].scale((float) scale);
 			rotGradient[2].scale((float) scale);
@@ -1549,8 +1549,8 @@ class Photontracer
 
 		reflectedVector = new Vector3D ();
 
-		rand1 = SupportClass.Random.NextDouble();
-		rand2 = SupportClass.Random.NextDouble();
+		rand1 = ThreadLocalRandom.NextDouble();
+		rand2 = ThreadLocalRandom.NextDouble();
 			
 		// calculate lambertian bounce
 		rtheta = System.Math.Acos(System.Math.Sqrt(rand1));
@@ -1623,7 +1623,7 @@ class Photontracer
 		transCoef = material.transmissionCoef(localPoint);
 		total = diffuseCoef + reflectCoef + transCoef;
 	
-		rand = (float) SupportClass.Random.NextDouble() * (1 + transCoef);
+		rand = (float) ThreadLocalRandom.NextDouble() * (1 + transCoef);
 		
 		cosVN = - V.dot(N);
 		

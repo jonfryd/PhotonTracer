@@ -113,11 +113,11 @@ namespace photontracer
 			// diffuse point light rejection sampling
 			do 
 			{
-				x = 2.0 * SupportClass.Random.NextDouble() - 1.0;
-				y = 2.0 * SupportClass.Random.NextDouble() - 1.0;
-				//y = 2.0 * SupportClass.Random.NextDouble() - 2.0;
-				z = 2.0 * SupportClass.Random.NextDouble() - 1.0;
-				//z = 1.0 * SupportClass.Random.NextDouble(); - 1.0;
+				x = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
+				y = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
+				//y = 2.0 * ThreadLocalRandom.NextDouble() - 2.0;
+				z = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
+				//z = 1.0 * ThreadLocalRandom.NextDouble(); - 1.0;
 			}
 			while ((x * x + y * y + z * z) > 1.0);
 			

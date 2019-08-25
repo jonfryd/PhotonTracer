@@ -56,8 +56,8 @@ namespace photontracer
 	
 		public override Vector3D position(int u, int v)
 		{ 
-			double	fu = (((double) u) + SupportClass.Random.NextDouble()) / (double) (u_samples ());
-			double	fv = (((double) v) + SupportClass.Random.NextDouble()) / (double) (v_samples ());
+			double	fu = (((double) u) + ThreadLocalRandom.NextDouble()) / (double) (u_samples ());
+			double	fv = (((double) v) + ThreadLocalRandom.NextDouble()) / (double) (v_samples ());
 			//double	fu = (((double) u)) / (double) (u_samples () - 1);
 			//double	fv = (((double) v)) / (double) (v_samples () - 1);
 
@@ -77,17 +77,17 @@ namespace photontracer
 			// triangle position rejection sampling
 			do 
 			{
-				u = SupportClass.Random.NextDouble();
-				v = SupportClass.Random.NextDouble();
+				u = ThreadLocalRandom.NextDouble();
+				v = ThreadLocalRandom.NextDouble();
 			}
 			while ((u + v) > 1.0);
 			
 			// diffuse direction light rejection sampling
 			do 
 			{
-				dx = 2.0 * SupportClass.Random.NextDouble() - 1.0;
-				dy = 2.0 * SupportClass.Random.NextDouble() - 1.0;
-				dz = 2.0 * SupportClass.Random.NextDouble() - 1.0;
+				dx = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
+				dy = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
+				dz = 2.0 * ThreadLocalRandom.NextDouble() - 1.0;
 			}
 			while ((dx * dx + dy * dy + dz * dz) > 1.0);
 			
